@@ -75,6 +75,9 @@ namespace SpleeterGui
             this.chkRPartBass = new System.Windows.Forms.CheckBox();
             this.chkRPartVocal = new System.Windows.Forms.CheckBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.codec_label = new System.Windows.Forms.Label();
+            this.chkSongName = new System.Windows.Forms.CheckBox();
+            this.cmbBox_codec = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
             this.pnlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.duration)).BeginInit();
@@ -128,7 +131,7 @@ namespace SpleeterGui
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -424,6 +427,9 @@ namespace SpleeterGui
             // 
             // pnlMain
             // 
+            this.pnlMain.Controls.Add(this.chkSongName);
+            this.pnlMain.Controls.Add(this.codec_label);
+            this.pnlMain.Controls.Add(this.cmbBox_codec);
             this.pnlMain.Controls.Add(this.duration);
             this.pnlMain.Controls.Add(this.lblSeconds);
             this.pnlMain.Controls.Add(this.lblMaxLength);
@@ -570,6 +576,48 @@ namespace SpleeterGui
             this.pictureBox1.TabIndex = 22;
             this.pictureBox1.TabStop = false;
             // 
+            // codec_label
+            // 
+            this.codec_label.AutoSize = true;
+            this.codec_label.Location = new System.Drawing.Point(325, 39);
+            this.codec_label.Name = "codec_label";
+            this.codec_label.Size = new System.Drawing.Size(72, 13);
+            this.codec_label.TabIndex = 21;
+            this.codec_label.Text = "Output codec";
+            // 
+            // chkSongName
+            // 
+            this.chkSongName.AccessibleDescription = "Writes song file name to the output files";
+            this.chkSongName.AccessibleName = "Song name to output";
+            this.chkSongName.AccessibleRole = System.Windows.Forms.AccessibleRole.CheckButton;
+            this.chkSongName.AutoSize = true;
+            this.chkSongName.Location = new System.Drawing.Point(310, 12);
+            this.chkSongName.Name = "chkSongName";
+            this.chkSongName.Size = new System.Drawing.Size(172, 17);
+            this.chkSongName.TabIndex = 39;
+            this.chkSongName.Text = "Write song name to output files";
+            this.chkSongName.UseVisualStyleBackColor = true;
+            this.chkSongName.CheckedChanged += new System.EventHandler(this.chkSongName_CheckedChanged);
+            // 
+            // cmbBox_codec
+            // 
+            this.cmbBox_codec.AccessibleDescription = "Choose what codec you want the output to be in";
+            this.cmbBox_codec.AccessibleName = "Choose codec";
+            this.cmbBox_codec.AccessibleRole = System.Windows.Forms.AccessibleRole.DropList;
+            this.cmbBox_codec.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbBox_codec.FormattingEnabled = true;
+            this.cmbBox_codec.Items.AddRange(new object[] {
+            "wav",
+            "mp3",
+            "ogg",
+            "m4a",
+            "wma",
+            "flac"});
+            this.cmbBox_codec.Location = new System.Drawing.Point(403, 36);
+            this.cmbBox_codec.Name = "cmbBox_codec";
+            this.cmbBox_codec.Size = new System.Drawing.Size(79, 21);
+            this.cmbBox_codec.TabIndex = 20;
+            // 
             // Form1
             // 
             this.AllowDrop = true;
@@ -661,6 +709,9 @@ namespace SpleeterGui
         private System.Windows.Forms.Label lblSeconds;
         private System.Windows.Forms.Label lblMaxLength;
         private System.Windows.Forms.NumericUpDown duration;
+        private System.Windows.Forms.Label codec_label;
+        private System.Windows.Forms.CheckBox chkSongName;
+        private System.Windows.Forms.ComboBox cmbBox_codec;
     }
 }
 

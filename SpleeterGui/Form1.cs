@@ -55,6 +55,7 @@ namespace SpleeterGui
         {
             //program startup - initialise things
             txt_output_directory.Text = Properties.Settings.Default.output_location;
+            cmbBox_codec.SelectedIndex = 1; //Default codec mp3
 
             if (Properties.Settings.Default.path_python == "")
             {
@@ -227,9 +228,15 @@ namespace SpleeterGui
                 System.IO.File.WriteAllText(storage + @"\config.json", get_config_string());
                 textBox1.AppendText(langStr["processing"] + " " + filename + "\r\n");
                 progress_txt.Text = langStr["working"] + "..." + files_remain + " "+ langStr["songs_remaining"];
-
-                ProcessStartInfo processStartInfo = new ProcessStartInfo(pyPath, @" -W ignore -m spleeter separate  -o " + (char)34 + txt_output_directory.Text + (char)34 + " -d " + (duration.Value).ToString() + " -p " + (char)34 + storage + @"\config.json" + (char)34 + " " + (char)34 + filename + (char)34);
-
+                ProcessStartInfo processStartInfo;
+                if (chkSongName.Checked == true)
+                {
+                    processStartInfo = new ProcessStartInfo(pyPath, @" -W ignore -m spleeter separate  -o " + (char)34 + txt_output_directory.Text + (char)34 + " -d " + (duration.Value).ToString() + " -p " + (char)34 + storage + @"\config.json" + (char)34 + " -c " + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + " -f " + (char)34 + "{filename} - {instrument}.{codec}" + (char)34 + " " + (char)34 + filename + (char)34);
+                }
+                else
+                {
+                    processStartInfo = new ProcessStartInfo(pyPath, @" -W ignore -m spleeter separate  -o " + (char)34 + txt_output_directory.Text + (char)34 + " -d " + (duration.Value).ToString() + " -p " + (char)34 + storage + @"\config.json" + (char)34 + " -c " + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + " " + (char)34 + filename + (char)34);
+                }
                 processStartInfo.WorkingDirectory = storage;
 
                 processStartInfo.UseShellExecute = false;
@@ -388,12 +395,13 @@ namespace SpleeterGui
                     )
                 {
                     String recomnbine_command = "";
+                    String codec = cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem);
                     int input_count = 0;
-                    if (chkRPartVocal.Checked) { input_count++; recomnbine_command += " -i " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\vocals.wav" + (char)34; }
-                    if (chkRPartBass.Checked) { input_count++; recomnbine_command += " -i " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\bass.wav" + (char)34; }
-                    if (chkRPartDrums.Checked) { input_count++; recomnbine_command += " -i " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\drums.wav" + (char)34; }
-                    if (chkRPartPiano.Checked) { input_count++; recomnbine_command += " -i " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\piano.wav" + (char)34; }
-                    if (chkRPartOther.Checked) { input_count++; recomnbine_command += " -i " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\other.wav" + (char)34; }
+                    if (chkRPartVocal.Checked) { input_count++; recomnbine_command += " -i " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\vocals." + codec + (char)34; }
+                    if (chkRPartBass.Checked) { input_count++; recomnbine_command += " -i " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\bass." + codec + (char)34; }
+                    if (chkRPartDrums.Checked) { input_count++; recomnbine_command += " -i " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\drums." + codec + (char)34; }
+                    if (chkRPartPiano.Checked) { input_count++; recomnbine_command += " -i " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\piano." + codec + (char)34; }
+                    if (chkRPartOther.Checked) { input_count++; recomnbine_command += " -i " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\other." + codec + (char)34; }
                     if (recomnbine_command != "")
                     {
                         String filter_a = "";
@@ -634,7 +642,7 @@ namespace SpleeterGui
             chkRPartPiano.Checked = false;
             chkRPartOther.Checked = false;
 
-            if (stem_count == "2")
+            if (stem_count == "2" || chkSongName.Checked == true)
             {
                 chkRecombine.Checked = false;
                 chkRecombine.Enabled = false;
@@ -688,6 +696,11 @@ namespace SpleeterGui
         {
             Properties.Settings.Default.duration = Convert.ToInt32(duration.Value);
             Properties.Settings.Default.Save();
+        }
+
+        private void chkSongName_CheckedChanged(object sender, EventArgs e)
+        {
+            update_checks();
         }
     }
 }
