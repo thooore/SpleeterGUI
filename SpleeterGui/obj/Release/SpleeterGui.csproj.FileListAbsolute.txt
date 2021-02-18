@@ -8,3 +8,11 @@ C:\Users\chris\Documents\GitHub\SpleeterGui\SpleeterGui\obj\Release\SpleeterGui.
 C:\Users\chris\Documents\GitHub\SpleeterGui\SpleeterGui\obj\Release\SpleeterGui.pdb
 C:\Users\chris\Documents\GitHub\SpleeterGui\SpleeterGui\obj\Release\SpleeterGui.csproj.CoreCompileInputs.cache
 C:\Users\chris\Documents\GitHub\SpleeterGui\SpleeterGui\obj\Release\SpleeterGui.csprojAssemblyReference.cache
+F:\Tore\Programmering\SpleeterGui\SpleeterGui\bin\Release\SpleeterGui.exe.config
+F:\Tore\Programmering\SpleeterGui\SpleeterGui\obj\Release\SpleeterGui.exe
+F:\Tore\Programmering\SpleeterGui\SpleeterGui\obj\Release\SpleeterGui.pdb
+F:\Tore\Programmering\SpleeterGui\SpleeterGui\bin\Release\SpleeterGui.exe
+F:\Tore\Programmering\SpleeterGui\SpleeterGui\bin\Release\SpleeterGui.pdb
+F:\Tore\Programmering\SpleeterGui\SpleeterGui\obj\Release\SpleeterGui.Form1.resources
+F:\Tore\Programmering\SpleeterGui\SpleeterGui\obj\Release\SpleeterGui.Properties.Resources.resources
+F:\Tore\Programmering\SpleeterGui\SpleeterGui\obj\Release\SpleeterGui.csproj.GenerateResource.Cache
