@@ -64,6 +64,9 @@ namespace SpleeterGui
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.pnlMain = new System.Windows.Forms.Panel();
+            this.chkSongName = new System.Windows.Forms.CheckBox();
+            this.codec_label = new System.Windows.Forms.Label();
+            this.cmbBox_codec = new System.Windows.Forms.ComboBox();
             this.duration = new System.Windows.Forms.NumericUpDown();
             this.lblSeconds = new System.Windows.Forms.Label();
             this.lblMaxLength = new System.Windows.Forms.Label();
@@ -75,9 +78,7 @@ namespace SpleeterGui
             this.chkRPartBass = new System.Windows.Forms.CheckBox();
             this.chkRPartVocal = new System.Windows.Forms.CheckBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.codec_label = new System.Windows.Forms.Label();
-            this.chkSongName = new System.Windows.Forms.CheckBox();
-            this.cmbBox_codec = new System.Windows.Forms.ComboBox();
+            this.chkNIStem = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.pnlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.duration)).BeginInit();
@@ -447,6 +448,48 @@ namespace SpleeterGui
             this.pnlMain.Size = new System.Drawing.Size(504, 445);
             this.pnlMain.TabIndex = 37;
             // 
+            // chkSongName
+            // 
+            this.chkSongName.AccessibleDescription = "Writes song file name to the output files";
+            this.chkSongName.AccessibleName = "Song name to output";
+            this.chkSongName.AccessibleRole = System.Windows.Forms.AccessibleRole.CheckButton;
+            this.chkSongName.AutoSize = true;
+            this.chkSongName.Location = new System.Drawing.Point(310, 12);
+            this.chkSongName.Name = "chkSongName";
+            this.chkSongName.Size = new System.Drawing.Size(172, 17);
+            this.chkSongName.TabIndex = 39;
+            this.chkSongName.Text = "Write song name to output files";
+            this.chkSongName.UseVisualStyleBackColor = true;
+            this.chkSongName.CheckedChanged += new System.EventHandler(this.chkSongName_CheckedChanged);
+            // 
+            // codec_label
+            // 
+            this.codec_label.AutoSize = true;
+            this.codec_label.Location = new System.Drawing.Point(325, 39);
+            this.codec_label.Name = "codec_label";
+            this.codec_label.Size = new System.Drawing.Size(72, 13);
+            this.codec_label.TabIndex = 21;
+            this.codec_label.Text = "Output codec";
+            // 
+            // cmbBox_codec
+            // 
+            this.cmbBox_codec.AccessibleDescription = "Choose what codec you want the output to be in";
+            this.cmbBox_codec.AccessibleName = "Choose codec";
+            this.cmbBox_codec.AccessibleRole = System.Windows.Forms.AccessibleRole.DropList;
+            this.cmbBox_codec.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbBox_codec.FormattingEnabled = true;
+            this.cmbBox_codec.Items.AddRange(new object[] {
+            "wav",
+            "mp3",
+            "ogg",
+            "m4a",
+            "wma",
+            "flac"});
+            this.cmbBox_codec.Location = new System.Drawing.Point(403, 36);
+            this.cmbBox_codec.Name = "cmbBox_codec";
+            this.cmbBox_codec.Size = new System.Drawing.Size(79, 21);
+            this.cmbBox_codec.TabIndex = 20;
+            // 
             // duration
             // 
             this.duration.Location = new System.Drawing.Point(124, 37);
@@ -498,6 +541,7 @@ namespace SpleeterGui
             // 
             // pnlRecombine
             // 
+            this.pnlRecombine.Controls.Add(this.chkNIStem);
             this.pnlRecombine.Controls.Add(this.chkRPartOther);
             this.pnlRecombine.Controls.Add(this.chkRecombine);
             this.pnlRecombine.Controls.Add(this.chkRPartPiano);
@@ -576,47 +620,18 @@ namespace SpleeterGui
             this.pictureBox1.TabIndex = 22;
             this.pictureBox1.TabStop = false;
             // 
-            // codec_label
+            // chkNIStem
             // 
-            this.codec_label.AutoSize = true;
-            this.codec_label.Location = new System.Drawing.Point(325, 39);
-            this.codec_label.Name = "codec_label";
-            this.codec_label.Size = new System.Drawing.Size(72, 13);
-            this.codec_label.TabIndex = 21;
-            this.codec_label.Text = "Output codec";
-            // 
-            // chkSongName
-            // 
-            this.chkSongName.AccessibleDescription = "Writes song file name to the output files";
-            this.chkSongName.AccessibleName = "Song name to output";
-            this.chkSongName.AccessibleRole = System.Windows.Forms.AccessibleRole.CheckButton;
-            this.chkSongName.AutoSize = true;
-            this.chkSongName.Location = new System.Drawing.Point(310, 12);
-            this.chkSongName.Name = "chkSongName";
-            this.chkSongName.Size = new System.Drawing.Size(172, 17);
-            this.chkSongName.TabIndex = 39;
-            this.chkSongName.Text = "Write song name to output files";
-            this.chkSongName.UseVisualStyleBackColor = true;
-            this.chkSongName.CheckedChanged += new System.EventHandler(this.chkSongName_CheckedChanged);
-            // 
-            // cmbBox_codec
-            // 
-            this.cmbBox_codec.AccessibleDescription = "Choose what codec you want the output to be in";
-            this.cmbBox_codec.AccessibleName = "Choose codec";
-            this.cmbBox_codec.AccessibleRole = System.Windows.Forms.AccessibleRole.DropList;
-            this.cmbBox_codec.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbBox_codec.FormattingEnabled = true;
-            this.cmbBox_codec.Items.AddRange(new object[] {
-            "wav",
-            "mp3",
-            "ogg",
-            "m4a",
-            "wma",
-            "flac"});
-            this.cmbBox_codec.Location = new System.Drawing.Point(403, 36);
-            this.cmbBox_codec.Name = "cmbBox_codec";
-            this.cmbBox_codec.Size = new System.Drawing.Size(79, 21);
-            this.cmbBox_codec.TabIndex = 20;
+            this.chkNIStem.AccessibleDescription = "Runs a script that generates a Native Instruments stem file";
+            this.chkNIStem.AccessibleName = "Generate NI Stem";
+            this.chkNIStem.AutoSize = true;
+            this.chkNIStem.Location = new System.Drawing.Point(299, 3);
+            this.chkNIStem.Name = "chkNIStem";
+            this.chkNIStem.Size = new System.Drawing.Size(111, 17);
+            this.chkNIStem.TabIndex = 40;
+            this.chkNIStem.Text = "Generate NI Stem";
+            this.chkNIStem.UseVisualStyleBackColor = true;
+            this.chkNIStem.CheckedChanged += new System.EventHandler(this.chkNIStem_CheckedChanged);
             // 
             // Form1
             // 
@@ -712,6 +727,7 @@ namespace SpleeterGui
         private System.Windows.Forms.Label codec_label;
         private System.Windows.Forms.CheckBox chkSongName;
         private System.Windows.Forms.ComboBox cmbBox_codec;
+        private System.Windows.Forms.CheckBox chkNIStem;
     }
 }
 

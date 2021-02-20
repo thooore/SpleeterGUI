@@ -40,3 +40,5 @@ F:\Tore\Programmering\SpleeterGui\SpleeterGui\bin\Debug\SpleeterGui.pdb
 F:\Tore\Programmering\SpleeterGui\SpleeterGui\obj\Debug\SpleeterGui.Form1.resources
 F:\Tore\Programmering\SpleeterGui\SpleeterGui\obj\Debug\SpleeterGui.Properties.Resources.resources
 F:\Tore\Programmering\SpleeterGui\SpleeterGui\obj\Debug\SpleeterGui.csproj.GenerateResource.Cache
+F:\Tore\Programmering\SpleeterGui\SpleeterGui\obj\Debug\SpleeterGui.csprojAssemblyReference.cache
+F:\Tore\Programmering\SpleeterGui\SpleeterGui\obj\Debug\SpleeterGui.csproj.CoreCompileInputs.cache

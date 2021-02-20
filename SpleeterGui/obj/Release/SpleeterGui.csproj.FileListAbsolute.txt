@@ -16,3 +16,4 @@ F:\Tore\Programmering\SpleeterGui\SpleeterGui\bin\Release\SpleeterGui.pdb
 F:\Tore\Programmering\SpleeterGui\SpleeterGui\obj\Release\SpleeterGui.Form1.resources
 F:\Tore\Programmering\SpleeterGui\SpleeterGui\obj\Release\SpleeterGui.Properties.Resources.resources
 F:\Tore\Programmering\SpleeterGui\SpleeterGui\obj\Release\SpleeterGui.csproj.GenerateResource.Cache
+F:\Tore\Programmering\SpleeterGui\SpleeterGui\obj\Release\SpleeterGui.csprojResolveAssemblyReference.cache
