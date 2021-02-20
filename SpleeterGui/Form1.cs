@@ -401,6 +401,7 @@ namespace SpleeterGui
             //cleanup function called by run_niStem
             Invoke((Action)(() =>
             {
+
                 //WONT WORK BECAUSE CURRENT_SONGNAME IS CHANGED!!!
                 textBox1.AppendText("\r\n" + (txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - mix.wav") + "\r\n");
                 textBox1.AppendText("\r\n" + (File.Exists(txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - mix.wav") + "\r\n"));
@@ -411,7 +412,21 @@ namespace SpleeterGui
                     // System.Media.SystemSounds.Beep.Play();
                 }
 
-                //do nothing
+
+                files_remain--;
+                if (files_remain > -1)
+                {
+                    //start processing the next song
+                    next_song();
+                }
+                if (files_remain < 0) files_remain = 0;
+
+                if (!run_silent)
+                {
+                    textBox1.AppendText("\r\n" + langStr["run_complete"] + "\r\n");
+                    System.Media.SystemSounds.Beep.Play();
+                }
+
             }));
         }
 
@@ -498,19 +513,6 @@ namespace SpleeterGui
                     {
                         run_NIStem("");
 
-                        files_remain--;
-                        if (files_remain > -1)
-                        {
-                            //start processing the next song
-                            next_song();
-                        }
-                        if (files_remain < 0) files_remain = 0;
-
-                        if (!run_silent)
-                        {
-                            textBox1.AppendText("\r\n" + langStr["run_complete"] + "\r\n");
-                            System.Media.SystemSounds.Beep.Play();
-                        }
                     }
                 }
             }));
