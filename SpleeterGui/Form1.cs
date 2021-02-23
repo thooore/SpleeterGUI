@@ -401,11 +401,6 @@ namespace SpleeterGui
             //cleanup function called by run_niStem
             Invoke((Action)(() =>
             {
-
-                //WONT WORK BECAUSE CURRENT_SONGNAME IS CHANGED!!!
-                textBox1.AppendText("\r\n" + (txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - mix.wav") + "\r\n");
-                textBox1.AppendText("\r\n" + (File.Exists(txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - mix.wav") + "\r\n"));
-
                 if (File.Exists(txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - mix.wav"))
                 {
                     File.Delete(txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - mix.wav");
