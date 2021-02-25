@@ -72,13 +72,13 @@ namespace SpleeterGui
             this.lblMaxLength = new System.Windows.Forms.Label();
             this.chkRecombine = new System.Windows.Forms.CheckBox();
             this.pnlRecombine = new System.Windows.Forms.Panel();
+            this.chkNIStem = new System.Windows.Forms.CheckBox();
             this.chkRPartOther = new System.Windows.Forms.CheckBox();
             this.chkRPartPiano = new System.Windows.Forms.CheckBox();
             this.chkRPartDrums = new System.Windows.Forms.CheckBox();
             this.chkRPartBass = new System.Windows.Forms.CheckBox();
             this.chkRPartVocal = new System.Windows.Forms.CheckBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.chkNIStem = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.pnlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.duration)).BeginInit();
@@ -132,7 +132,7 @@ namespace SpleeterGui
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -174,41 +174,41 @@ namespace SpleeterGui
             // helpFAQToolStripMenuItem
             // 
             this.helpFAQToolStripMenuItem.Name = "helpFAQToolStripMenuItem";
-            this.helpFAQToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.helpFAQToolStripMenuItem.Text = "&Help && FAQ";
+            this.helpFAQToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.helpFAQToolStripMenuItem.Text = "&Help and FAQ";
             this.helpFAQToolStripMenuItem.Click += new System.EventHandler(this.helpFAQToolStripMenuItem_Click);
             // 
             // checkSpleeterGUIUpdateToolStripMenuItem
             // 
             this.checkSpleeterGUIUpdateToolStripMenuItem.Name = "checkSpleeterGUIUpdateToolStripMenuItem";
-            this.checkSpleeterGUIUpdateToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.checkSpleeterGUIUpdateToolStripMenuItem.Text = "Check &SpleeterGUI version";
+            this.checkSpleeterGUIUpdateToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.checkSpleeterGUIUpdateToolStripMenuItem.Text = "Check &SpleeterGUI updates";
             this.checkSpleeterGUIUpdateToolStripMenuItem.Click += new System.EventHandler(this.checkSpleeterGUIUpdateToolStripMenuItem_Click);
             // 
             // spleeterupgradeToolStripMenuItem
             // 
             this.spleeterupgradeToolStripMenuItem.Name = "spleeterupgradeToolStripMenuItem";
-            this.spleeterupgradeToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.spleeterupgradeToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.spleeterupgradeToolStripMenuItem.Text = "Spleeter core &upgrade";
             this.spleeterupgradeToolStripMenuItem.Click += new System.EventHandler(this.spleeterupgradeToolStripMenuItem_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(209, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(213, 6);
             // 
             // spleeterGithubPageToolStripMenuItem
             // 
             this.spleeterGithubPageToolStripMenuItem.Name = "spleeterGithubPageToolStripMenuItem";
-            this.spleeterGithubPageToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.spleeterGithubPageToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.spleeterGithubPageToolStripMenuItem.Text = "SpleeterGUI &Github page";
             this.spleeterGithubPageToolStripMenuItem.Click += new System.EventHandler(this.spleeterGithubPageToolStripMenuItem_Click);
             // 
             // makenItSoToolStripMenuItem1
             // 
             this.makenItSoToolStripMenuItem1.Name = "makenItSoToolStripMenuItem1";
-            this.makenItSoToolStripMenuItem1.Size = new System.Drawing.Size(212, 22);
-            this.makenItSoToolStripMenuItem1.Text = "&Maken It So";
+            this.makenItSoToolStripMenuItem1.Size = new System.Drawing.Size(216, 22);
+            this.makenItSoToolStripMenuItem1.Text = "&Maken It So Github";
             this.makenItSoToolStripMenuItem1.Click += new System.EventHandler(this.makenItSoToolStripMenuItem1_Click);
             // 
             // btnSaveTo
@@ -450,7 +450,7 @@ namespace SpleeterGui
             // 
             // chkSongName
             // 
-            this.chkSongName.AccessibleDescription = "Writes song file name to the output files";
+            this.chkSongName.AccessibleDescription = "Writes input song file name to the output files";
             this.chkSongName.AccessibleName = "Song name to output";
             this.chkSongName.AccessibleRole = System.Windows.Forms.AccessibleRole.CheckButton;
             this.chkSongName.AutoSize = true;
@@ -458,7 +458,7 @@ namespace SpleeterGui
             this.chkSongName.Name = "chkSongName";
             this.chkSongName.Size = new System.Drawing.Size(172, 17);
             this.chkSongName.TabIndex = 39;
-            this.chkSongName.Text = "Write song name to output files";
+            this.chkSongName.Text = "Write input name to output files";
             this.chkSongName.UseVisualStyleBackColor = true;
             this.chkSongName.CheckedChanged += new System.EventHandler(this.chkSongName_CheckedChanged);
             // 
@@ -553,6 +553,19 @@ namespace SpleeterGui
             this.pnlRecombine.Size = new System.Drawing.Size(493, 14);
             this.pnlRecombine.TabIndex = 39;
             // 
+            // chkNIStem
+            // 
+            this.chkNIStem.AccessibleDescription = "Runs a script that generates a Native Instruments stem file";
+            this.chkNIStem.AccessibleName = "Generate NI Stem";
+            this.chkNIStem.AutoSize = true;
+            this.chkNIStem.Location = new System.Drawing.Point(299, 3);
+            this.chkNIStem.Name = "chkNIStem";
+            this.chkNIStem.Size = new System.Drawing.Size(111, 17);
+            this.chkNIStem.TabIndex = 40;
+            this.chkNIStem.Text = "Generate NI Stem";
+            this.chkNIStem.UseVisualStyleBackColor = true;
+            this.chkNIStem.CheckedChanged += new System.EventHandler(this.chkNIStem_CheckedChanged);
+            // 
             // chkRPartOther
             // 
             this.chkRPartOther.AutoSize = true;
@@ -619,19 +632,6 @@ namespace SpleeterGui
             this.pictureBox1.Size = new System.Drawing.Size(279, 71);
             this.pictureBox1.TabIndex = 22;
             this.pictureBox1.TabStop = false;
-            // 
-            // chkNIStem
-            // 
-            this.chkNIStem.AccessibleDescription = "Runs a script that generates a Native Instruments stem file";
-            this.chkNIStem.AccessibleName = "Generate NI Stem";
-            this.chkNIStem.AutoSize = true;
-            this.chkNIStem.Location = new System.Drawing.Point(299, 3);
-            this.chkNIStem.Name = "chkNIStem";
-            this.chkNIStem.Size = new System.Drawing.Size(111, 17);
-            this.chkNIStem.TabIndex = 40;
-            this.chkNIStem.Text = "Generate NI Stem";
-            this.chkNIStem.UseVisualStyleBackColor = true;
-            this.chkNIStem.CheckedChanged += new System.EventHandler(this.chkNIStem_CheckedChanged);
             // 
             // Form1
             // 

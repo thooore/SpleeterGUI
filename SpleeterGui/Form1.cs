@@ -87,6 +87,8 @@ namespace SpleeterGui
             txt = txt.Replace("[NL]", "\r\n");
             textBox1.Text = txt + "...\r\n";
             run_cmd("pip show spleeter");
+
+            textBox1.AppendText(System.Environment.CurrentDirectory + "\r\n");
         }
 
         void get_languages()
@@ -574,18 +576,18 @@ namespace SpleeterGui
         private void spleeterGithubPageToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //help - opens SpleeterGUI github page in a browser window
-            System.Diagnostics.Process.Start("https://github.com/boy1dr/SpleeterGui");
+            System.Diagnostics.Process.Start("https://github.com/thooore/SpleeterGUI");
         }
 
         private void makenItSoToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            //help - open's the Maken it so youtube channel in a browser window
-            System.Diagnostics.Process.Start("https://www.youtube.com/user/mitchellcj/videos");
+            //help - opens the Maken it so old SpleeterGUI github in a browser window
+            System.Diagnostics.Process.Start("https://github.com/boy1dr/SpleeterGUI");
         }
 
         private void helpFAQToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //help - open's the SpleeterGUI help page in a browser window
+            //help - opens the SpleeterGUI help page in a browser window
             System.Diagnostics.Process.Start("https://makenweb.com/spleeter_help.php");
         }
 
@@ -672,40 +674,44 @@ namespace SpleeterGui
         private void checkSpleeterGUIUpdateToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //help - check SpleeterGUI version
-            WebRequest request = WebRequest.Create("https://raw.githubusercontent.com/boy1dr/SpleeterGui/master/SpleeterGui/Properties/AssemblyInfo.cs");
-            WebResponse response = request.GetResponse();
-            Stream data = response.GetResponseStream();
-            string html = String.Empty;
-            int posStart = 0;
-            int posEnd = 0;
-            String version_check = "";
-            using (StreamReader sr = new StreamReader(data))
-            {
-                html = sr.ReadToEnd();
-            }
-            if (html != "")
-            {
-                posStart = html.IndexOf("\n[assembly: AssemblyVersion(");
-                if (posStart > 0)
+            try {
+                WebRequest request = WebRequest.Create("https://raw.githubusercontent.com/thooore/SpleeterGUI/master/SpleeterGui/Properties/AssemblyInfo.cs");
+                WebResponse response = request.GetResponse();
+                Stream data = response.GetResponseStream();
+                string html = String.Empty;
+                int posStart = 0;
+                int posEnd = 0;
+                String version_check = "";
+                using (StreamReader sr = new StreamReader(data))
                 {
-                    posStart += 29;
-                    posEnd = html.IndexOf('"', posStart);
-                    if (posEnd > 0)
+                    html = sr.ReadToEnd();
+                }
+                if (html != "")
+                {
+                    posStart = html.IndexOf("\n[assembly: AssemblyVersion(");
+                    if (posStart > 0)
                     {
-                        version_check = html.Substring(posStart, posEnd - posStart);
-                        if (version_check != "" && version_check != gui_version)
+                        posStart += 29;
+                        posEnd = html.IndexOf('"', posStart);
+                        if (posEnd > 0)
                         {
-                            MessageBox.Show(langStr["version"] + " " + version_check + " " + langStr["is_available"]);
-                        }
-                        else
-                        {
-                            MessageBox.Show(langStr["latest"]);
+                            version_check = html.Substring(posStart, posEnd - posStart);
+                            if (version_check != "" && version_check != gui_version)
+                            {
+                                MessageBox.Show(langStr["version"] + " " + version_check + " " + langStr["is_available"]);
+                            }
+                            else
+                            {
+                                MessageBox.Show(langStr["latest"] + " " + gui_version);
+                            }
                         }
                     }
                 }
-            }
-            else
-            {
+                else
+                {
+                    MessageBox.Show(langStr["unable"]);
+                }
+            } catch {
                 MessageBox.Show(langStr["unable"]);
             }
         }
@@ -834,13 +840,8 @@ namespace SpleeterGui
                 (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - drums." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34 + " " +
                 (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - bass." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34 + " " +
                 (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - other." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34 + " " +
-                "-m " + (char)34 + storage + @"\ni-stem\ni-stem-metadata.json" + (char)34 + " -o " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + ".stem." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34;
+                "-m " + (char)34 + storage + @"\ni-stem\ni-stem-metadata.json" + (char)34 + " -o " + (char)34 + txt_output_directory.Text + @"\" + current_songname + ".stem." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34;
 
-            //args = "create -x " + (char)34 + txt_output_directory.Text + @"\" + current_songname + " - vocals." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34 + " -s " +
-            //    (char)34 + txt_output_directory.Text + @"\" + current_songname + " - vocals." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34 + " " +
-            //    (char)34 + txt_output_directory.Text + @"\" + current_songname + " - bass." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34 + " " +
-            //    (char)34 + txt_output_directory.Text + @"\" + current_songname + " - drums." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34 + " " +
-            //    (char)34 + txt_output_directory.Text + @"\" + current_songname + " - other." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34;
 
             textBox1.AppendText("\r\n" + (storage + @"\ni-stem\ni-stem.exe") + "\r\n");
             textBox1.AppendText("\r\n" + File.Exists(storage + @"\ni-stem\ni-stem.exe") + "\r\n");
@@ -862,24 +863,13 @@ namespace SpleeterGui
             bool processStarted = process.Start();
             process.BeginOutputReadLine();
             process.BeginErrorReadLine();
-
-            // IS RUN AFTER THE PROCESSING OF THE NEXT SONG HAS STARTED!!!
-
-            //textBox1.AppendText("\r\n" + (txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - mix.wav") + "\r\n");
-            //textBox1.AppendText("\r\n" + (File.Exists(txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - mix.wav") + "\r\n"));
-
-            //if (File.Exists(txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - mix.wav"))
-            //{
-            //    File.Delete(txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - mix.wav");
-            //    // System.Media.SystemSounds.Beep.Play();
-            //}
         }
 
         private void run_ffmpeg(String filename)
         {
             run_ffmpegAudio(filename);
-            run_ffmpegCover(filename);      // Not currently used
-            run_ffmpegMetadata(filename);   // Not currently used
+            //run_ffmpegCover(filename);      // Not currently used
+            //run_ffmpegMetadata(filename);   // Not currently used
         }
 
         private void run_ffmpegCover(String filename)
@@ -910,7 +900,7 @@ namespace SpleeterGui
 
         private void run_ffmpegMetadata(String filename)
         {
-            //ALBUM COVER
+            //METADATA
             String args = "-y -i " + (char)34 + filename + (char)34 + " -f ffmetadata " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + ".txt" + (char)34;
 
             ProcessStartInfo processStartInfo = new ProcessStartInfo(storage + @"\ffmpeg.exe", args);
@@ -936,20 +926,6 @@ namespace SpleeterGui
 
         private void run_ffmpegAudio(String filename)
         {
-
-            //textBox1.AppendText("\r\n" + (filename) + "\r\n");
-            //textBox1.AppendText("\r\n" + File.Exists(filename) + "\r\n");
-
-            //String args = "-i " + (char)34 + filename + (char)34 + " -c:a aac -map a -b 256k -f ffmetadata" + (char)34 + txt_output_directory.Text + @"\" + current_songname + ".txt" + (char)34 +
-            //    " " + (char)34 + txt_output_directory.Text + @"\" + current_songname + " - mix." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34;
-
-            //String args = "-y -i " + (char)34 + filename + (char)34 + " -c:a aac -map a -b 256k -f ffmetadata" + (char)34 + txt_output_directory.Text + @"\" + current_songname + ".txt" + (char)34 +
-            //    " -vcodec copy " + (char)34 + txt_output_directory.Text + @"\" + current_songname + ".jpg" +(char)34 + " " + (char)34 + txt_output_directory.Text + @"\" + current_songname + " - mix." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34;
-
-
-
-            //FIRST AUDIO
-            // String args = "-y -i " + (char)34 + filename + (char)34 + " -c:a aac -b 256k " + (char)34 + txt_output_directory.Text + @"\" + current_songname + " - mix." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34;
             String args = "-y -i " + (char)34 + filename + (char)34 + " " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - mix.wav" + (char)34;
 
             ProcessStartInfo processStartInfo = new ProcessStartInfo(storage + @"\ffmpeg.exe", args);

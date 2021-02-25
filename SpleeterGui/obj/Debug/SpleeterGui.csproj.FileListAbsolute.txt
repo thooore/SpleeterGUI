@@ -42,3 +42,8 @@ F:\Tore\Programmering\SpleeterGui\SpleeterGui\obj\Debug\SpleeterGui.Properties.R
 F:\Tore\Programmering\SpleeterGui\SpleeterGui\obj\Debug\SpleeterGui.csproj.GenerateResource.Cache
 F:\Tore\Programmering\SpleeterGui\SpleeterGui\obj\Debug\SpleeterGui.csprojAssemblyReference.cache
 F:\Tore\Programmering\SpleeterGui\SpleeterGui\obj\Debug\SpleeterGui.csproj.CoreCompileInputs.cache
+F:\Tore\Programmering\SpleeterGui\SpleeterGui\bin\Debug\SpleeterGui.exe.manifest
+F:\Tore\Programmering\SpleeterGui\SpleeterGui\bin\Debug\SpleeterGui.application
+F:\Tore\Programmering\SpleeterGui\SpleeterGui\obj\Debug\SpleeterGui.TrustInfo.xml
+F:\Tore\Programmering\SpleeterGui\SpleeterGui\obj\Debug\SpleeterGui.exe.manifest
+F:\Tore\Programmering\SpleeterGui\SpleeterGui\obj\Debug\SpleeterGui.application
