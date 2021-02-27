@@ -58,6 +58,6 @@
     <lang english="You are using the latest version" control="latest">Stai usando l'ultima versione</lang>
     <lang english="Unable get new version data, check internet connection" control="unable">Impossibile ottenere i dati della nuova versione, controlla la connessione a Internet</lang>
     <lang english="Choose output location" control="set_output">Scegli la posizione di uscita</lang>
-    <lang english="Choose location of python.exe" control="set_python_path">Scegli la posizione di python.exe</lang>
+    <lang english="Choose location of root_folder.txt" control="set_python_path">Scegli la posizione di root_folder.txt</lang>
     <lang english="Choose location of json config files" control="set_json_path">Choose location of json config files</lang>
 </root>

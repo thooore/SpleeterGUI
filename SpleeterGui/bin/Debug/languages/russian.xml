@@ -58,5 +58,5 @@
   <lang english="You are using the latest version" control="latest">Вы используете последнюю версию</lang>
   <lang english="Unable get new version data, check internet connection" control="unable">Невозможно получить данные новой версии, проверьте интернет-соединение</lang>
   <lang english="Choose output location" control="set_output">Выберите место выхода</lang>
-  <lang english="Choose location of python.exe" control="set_python_path">Выберите местоположение python.exe</lang>
+  <lang english="Choose location of root_folder.txt" control="set_python_path">Выберите местоположение root_folder.txt</lang>
 </root>

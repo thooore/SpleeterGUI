@@ -26,14 +26,15 @@ namespace SpleeterGui
         private string storage = "";
 
         private string path_python = "";    //needs to be the SpleeterGUI folder, not python
-        
+
+        private string current_song = "";
         private string current_songname = "";
         private int files_remain = 0;
         private List<string> files_to_process = new List<string>();
         private Boolean run_silent = true;
         private String gui_version = "";
         IDictionary<string, string> langStr = new Dictionary<string, string>();
-        
+
         public Form1()
         {
             InitializeComponent();
@@ -55,6 +56,7 @@ namespace SpleeterGui
         {
             //program startup - initialise things
             txt_output_directory.Text = Properties.Settings.Default.output_location;
+            cmbBox_codec.SelectedIndex = 1; //Default codec mp3
 
             if (Properties.Settings.Default.path_python == "")
             {
@@ -67,13 +69,13 @@ namespace SpleeterGui
                 storage = Properties.Settings.Default.path_python;
             }
 
-            
+
             gui_version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             String version = Assembly.GetExecutingAssembly().GetName().Version.Major.ToString() + "." + Assembly.GetExecutingAssembly().GetName().Version.Minor.ToString();
             this.Text = "SpleeterGUI " + version;
 
-            
-           
+
+
 
             duration.Value = Properties.Settings.Default.duration;
 
@@ -85,6 +87,8 @@ namespace SpleeterGui
             txt = txt.Replace("[NL]", "\r\n");
             textBox1.Text = txt + "...\r\n";
             run_cmd("pip show spleeter");
+
+            textBox1.AppendText(System.Environment.CurrentDirectory + "\r\n");
         }
 
         void get_languages()
@@ -95,9 +99,10 @@ namespace SpleeterGui
             string[] fileEntries = Directory.GetFiles(enviroment + "\\languages");
 
 
-            ToolStripMenuItem[] items = new ToolStripMenuItem[ fileEntries.Length ];
+            ToolStripMenuItem[] items = new ToolStripMenuItem[fileEntries.Length];
             int i = 0;
-            foreach (string fileName in fileEntries) {
+            foreach (string fileName in fileEntries)
+            {
                 string name = Path.GetFileName(fileName);
                 XmlDataDocument xmldoc = new XmlDataDocument();
                 XmlNodeList xmlnode;
@@ -107,7 +112,7 @@ namespace SpleeterGui
                 string lang_text = xmlnode[0].ChildNodes.Item(0).InnerText.Trim();
 
                 items[i] = new ToolStripMenuItem();
-                items[i].Text = lang_text + " (" + name.Replace(".xml","") + ")";
+                items[i].Text = lang_text + " (" + name.Replace(".xml", "") + ")";
                 items[i].Tag = name.Replace(".xml", "");
                 items[i].Click += new EventHandler(LanguageItemClickHandler);
                 i++;
@@ -152,8 +157,10 @@ namespace SpleeterGui
                 control_label = xmlnode[i].ChildNodes.Item(0).InnerText.Trim();
                 control_name = xmlnode[i].Attributes["control"].InnerText;
 
-                foreach (ToolStripMenuItem item in menuStrip1.Items) { 
-                    if (item.Name == control_name) { 
+                foreach (ToolStripMenuItem item in menuStrip1.Items)
+                {
+                    if (item.Name == control_name)
+                    {
                         item.Text = control_label;
                     }
                     foreach (ToolStripMenuItem subitem in item.DropDownItems.OfType<ToolStripMenuItem>())
@@ -202,7 +209,7 @@ namespace SpleeterGui
                 }
                 textBox1.AppendText(langStr["starting_all"] + "\r\n");
                 progressBar1.Maximum = files_remain + 1;
-                progressBar1.Value = 0; 
+                progressBar1.Value = 0;
                 progress_txt.Text = langStr["starting"] + "..." + files_remain + " " + langStr["songs_remaining"];
                 next_song();
             }
@@ -211,7 +218,7 @@ namespace SpleeterGui
                 System.Media.SystemSounds.Asterisk.Play();
             }
         }
-   
+
         private void next_song()
         {
             //begins the spleeting function on the next song in the queue
@@ -220,16 +227,26 @@ namespace SpleeterGui
                 run_silent = false;
                 //string pyPath = storage + @"\python\python.exe";
                 string pyPath = path_python + @"\python.exe";
-                
+
                 string filename = files_to_process[0];
-                
+
                 progressBar1.Value = progressBar1.Value + 1;
                 System.IO.File.WriteAllText(storage + @"\config.json", get_config_string());
                 textBox1.AppendText(langStr["processing"] + " " + filename + "\r\n");
-                progress_txt.Text = langStr["working"] + "..." + files_remain + " "+ langStr["songs_remaining"];
-
-                ProcessStartInfo processStartInfo = new ProcessStartInfo(pyPath, @" -W ignore -m spleeter separate  -o " + (char)34 + txt_output_directory.Text + (char)34 + " -d " + (duration.Value).ToString() + " -p " + (char)34 + storage + @"\config.json" + (char)34 + " " + (char)34 + filename + (char)34);
-
+                progress_txt.Text = langStr["working"] + "..." + files_remain + " " + langStr["songs_remaining"];
+                ProcessStartInfo processStartInfo;
+                if (chkNIStem.Checked == true)
+                {
+                    processStartInfo = new ProcessStartInfo(pyPath, @" -W ignore -m spleeter separate  -o " + (char)34 + txt_output_directory.Text + (char)34 + " -d " + (duration.Value).ToString() + " -p " + (char)34 + storage + @"\config.json" + (char)34 + " -c " + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + " -f " + (char)34 + "{filename}\\{filename} - {instrument}.{codec}" + (char)34 + " " + (char)34 + filename + (char)34);
+                }
+                else if (chkSongName.Checked == true)
+                {
+                    processStartInfo = new ProcessStartInfo(pyPath, @" -W ignore -m spleeter separate  -o " + (char)34 + txt_output_directory.Text + (char)34 + " -d " + (duration.Value).ToString() + " -p " + (char)34 + storage + @"\config.json" + (char)34 + " -c " + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + " -f " + (char)34 + "{filename}\\{filename} - {instrument}.{codec}" + (char)34 + " " + (char)34 + filename + (char)34);
+                }
+                else
+                {
+                    processStartInfo = new ProcessStartInfo(pyPath, @" -W ignore -m spleeter separate  -o " + (char)34 + txt_output_directory.Text + (char)34 + " -d " + (duration.Value).ToString() + " -p " + (char)34 + storage + @"\config.json" + (char)34 + " -c " + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + " " + (char)34 + filename + (char)34);
+                }
                 processStartInfo.WorkingDirectory = storage;
 
                 processStartInfo.UseShellExecute = false;
@@ -253,6 +270,7 @@ namespace SpleeterGui
                     process.BeginErrorReadLine();
 
                     current_songname = Path.GetFileNameWithoutExtension(filename);
+                    current_song = filename;
                 }
                 catch
                 {
@@ -339,7 +357,7 @@ namespace SpleeterGui
         bool txt_check(string txt)  //prevent output
         {
             bool allow = true;
-            if (txt.IndexOf("Author-email") !=-1){ allow = false; }
+            if (txt.IndexOf("Author-email") != -1) { allow = false; }
             if (txt.IndexOf("Summary:") != -1) { allow = false; }
             if (txt.IndexOf("source separation library") != -1) { allow = false; }
             if (txt.IndexOf("models based on") != -1) { allow = false; }
@@ -371,54 +389,128 @@ namespace SpleeterGui
             }));
         }
 
+        private void run_ffmpegExited(object sender, EventArgs e)
+        {
+            //cleanup function called by run_ffmpeg
+            Invoke((Action)(() =>
+            {
+                //do nothing
+            }));
+        }
+
+        private void run_niStemExited(object sender, EventArgs e)
+        {
+            //cleanup function called by run_niStem
+            Invoke((Action)(() =>
+            {
+                if (File.Exists(txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - mix.wav"))
+                {
+                    File.Delete(txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - mix.wav");
+                    // System.Media.SystemSounds.Beep.Play();
+                }
+
+
+                files_remain--;
+                if (files_remain > -1)
+                {
+                    //start processing the next song
+                    next_song();
+                }
+                if (files_remain < 0) files_remain = 0;
+
+                if (!run_silent)
+                {
+                    textBox1.AppendText("\r\n" + langStr["run_complete"] + "\r\n");
+                    System.Media.SystemSounds.Beep.Play();
+                }
+
+            }));
+        }
+
         private void ProcessExited(object sender, EventArgs e)
         {
             //called by run_cmd when thread exits after spleeting a song. runs the recombine (if enabled) and starts processing next song in queue.
             Invoke((Action)(() =>
             {
-                //recombine audio (if enabled)
-                if (
-                    current_songname!="" &&
-                    chkRecombine.Checked == true && (
-                    chkRPartVocal.Checked ||
-                    chkRPartBass.Checked ||
-                    chkRPartDrums.Checked ||
-                    chkRPartPiano.Checked ||
-                    chkRPartOther.Checked)
-                    )
+                if (chkNIStem.Checked == false)
                 {
-                    String recomnbine_command = "";
-                    int input_count = 0;
-                    if (chkRPartVocal.Checked) { input_count++; recomnbine_command += " -i " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\vocals.wav" + (char)34; }
-                    if (chkRPartBass.Checked) { input_count++; recomnbine_command += " -i " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\bass.wav" + (char)34; }
-                    if (chkRPartDrums.Checked) { input_count++; recomnbine_command += " -i " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\drums.wav" + (char)34; }
-                    if (chkRPartPiano.Checked) { input_count++; recomnbine_command += " -i " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\piano.wav" + (char)34; }
-                    if (chkRPartOther.Checked) { input_count++; recomnbine_command += " -i " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\other.wav" + (char)34; }
-                    if (recomnbine_command != "")
+                    //recombine audio (if enabled)
+                    if (
+                        current_songname != "" &&
+                        chkRecombine.Checked == true && (
+                        chkRPartVocal.Checked ||
+                        chkRPartBass.Checked ||
+                        chkRPartDrums.Checked ||
+                        chkRPartPiano.Checked ||
+                        chkRPartOther.Checked)
+                        )
                     {
-                        String filter_a = "";
-                        String filter_b = "";
-                        for (int i = 0; i < input_count; i++)
+                        String recomnbine_command = "";
+                        String codec = cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem);
+                        int input_count = 0;
+                        if (chkSongName.Checked == false)
                         {
-                            filter_a += "["+i+"]volume=" + input_count + "["+((char)97+i) +"];";
-                            filter_b += "[" + ((char)97 + i) + "]";
+                            if (chkRPartVocal.Checked) { input_count++; recomnbine_command += " -i " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\vocals." + codec + (char)34; }
+                            if (chkRPartBass.Checked) { input_count++; recomnbine_command += " -i " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\bass." + codec + (char)34; }
+                            if (chkRPartDrums.Checked) { input_count++; recomnbine_command += " -i " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\drums." + codec + (char)34; }
+                            if (chkRPartPiano.Checked) { input_count++; recomnbine_command += " -i " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\piano." + codec + (char)34; }
+                            if (chkRPartOther.Checked) { input_count++; recomnbine_command += " -i " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\other." + codec + (char)34; }
+                            if (recomnbine_command != "")
+                            {
+                                String filter_a = "";
+                                String filter_b = "";
+                                for (int i = 0; i < input_count; i++)
+                                {
+                                    filter_a += "[" + i + "]volume=" + input_count + "[" + ((char)97 + i) + "];";
+                                    filter_b += "[" + ((char)97 + i) + "]";
+                                }
+                                recomnbine_command = recomnbine_command + " -filter_complex " + (char)34 + filter_a + filter_b + "amix=inputs=" + input_count.ToString() + ":duration =longest" + (char)34 + " " + (char)34 + txt_output_directory.Text + @"\" + current_songname + "_recombined." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34;
+                                run_recombine(recomnbine_command);
+                            }
                         }
-                        recomnbine_command = recomnbine_command + " -filter_complex " + (char)34 + filter_a + filter_b + "amix=inputs=" + input_count.ToString() + ":duration =longest" + (char)34 + " " + (char)34 + txt_output_directory.Text + @"\" + current_songname + "_recombined.wav" + (char)34;
-                        run_recombine(recomnbine_command);
+                        else
+                        {
+                            if (chkRPartVocal.Checked) { input_count++; recomnbine_command += " -i " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + @" - vocals." + codec + (char)34; }
+                            if (chkRPartBass.Checked) { input_count++; recomnbine_command += " -i " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + @" - bass." + codec + (char)34; }
+                            if (chkRPartDrums.Checked) { input_count++; recomnbine_command += " -i " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + @" - drums." + codec + (char)34; }
+                            if (chkRPartPiano.Checked) { input_count++; recomnbine_command += " -i " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + @" - piano." + codec + (char)34; }
+                            if (chkRPartOther.Checked) { input_count++; recomnbine_command += " -i " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + @" - other." + codec + (char)34; }
+                            if (recomnbine_command != "")
+                            {
+                                String filter_a = "";
+                                String filter_b = "";
+                                for (int i = 0; i < input_count; i++)
+                                {
+                                    filter_a += "[" + i + "]volume=" + input_count + "[" + ((char)97 + i) + "];";
+                                    filter_b += "[" + ((char)97 + i) + "]";
+                                }
+                                recomnbine_command = recomnbine_command + " -filter_complex " + (char)34 + filter_a + filter_b + "amix=inputs=" + input_count.ToString() + ":duration =longest" + (char)34 + " " + (char)34 + txt_output_directory.Text + @"\" + current_songname + "_recombined." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34;
+                                run_recombine(recomnbine_command);
+                            }
+                        }
+                    }
+
+                    files_remain--;
+                    if (files_remain > -1)
+                    {
+                        //start processing the next song
+                        next_song();
+                    }
+                    if (files_remain < 0) files_remain = 0;
+
+                    if (!run_silent)
+                    {
+                        textBox1.AppendText("\r\n" + langStr["run_complete"] + "\r\n");
+                        System.Media.SystemSounds.Beep.Play();
                     }
                 }
-
-                files_remain--;
-                if (files_remain > -1) { 
-                    //start processing the next song
-                    next_song();
-                }
-                if (files_remain < 0) files_remain = 0;
-                
-                if (!run_silent)
+                if (chkNIStem.Checked == true)
                 {
-                    textBox1.AppendText("\r\n" + langStr["run_complete"] + "\r\n");
-                    System.Media.SystemSounds.Beep.Play();
+                    if (files_remain > 0)
+                    {
+                        run_NIStem("");
+
+                    }
                 }
             }));
         }
@@ -484,18 +576,18 @@ namespace SpleeterGui
         private void spleeterGithubPageToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //help - opens SpleeterGUI github page in a browser window
-            System.Diagnostics.Process.Start("https://github.com/boy1dr/SpleeterGui");
+            System.Diagnostics.Process.Start("https://github.com/thooore/SpleeterGUI");
         }
 
         private void makenItSoToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            //help - open's the Maken it so youtube channel in a browser window
-            System.Diagnostics.Process.Start("https://www.youtube.com/user/mitchellcj/videos");
+            //help - opens the Maken it so old SpleeterGUI github in a browser window
+            System.Diagnostics.Process.Start("https://github.com/boy1dr/SpleeterGUI");
         }
 
         private void helpFAQToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //help - open's the SpleeterGUI help page in a browser window
+            //help - opens the SpleeterGUI help page in a browser window
             System.Diagnostics.Process.Start("https://makenweb.com/spleeter_help.php");
         }
 
@@ -582,40 +674,44 @@ namespace SpleeterGui
         private void checkSpleeterGUIUpdateToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //help - check SpleeterGUI version
-            WebRequest request = WebRequest.Create("https://raw.githubusercontent.com/boy1dr/SpleeterGui/master/SpleeterGui/Properties/AssemblyInfo.cs");
-            WebResponse response = request.GetResponse();
-            Stream data = response.GetResponseStream();
-            string html = String.Empty;
-            int posStart=0;
-            int posEnd=0;
-            String version_check = "";
-            using (StreamReader sr = new StreamReader(data))
-            {
-                html = sr.ReadToEnd();
-            }
-            if (html != "")
-            {
-                posStart = html.IndexOf("\n[assembly: AssemblyVersion(");
-                if (posStart > 0)
+            try {
+                WebRequest request = WebRequest.Create("https://raw.githubusercontent.com/thooore/SpleeterGUI/master/SpleeterGui/Properties/AssemblyInfo.cs");
+                WebResponse response = request.GetResponse();
+                Stream data = response.GetResponseStream();
+                string html = String.Empty;
+                int posStart = 0;
+                int posEnd = 0;
+                String version_check = "";
+                using (StreamReader sr = new StreamReader(data))
                 {
-                    posStart+= 29;
-                    posEnd = html.IndexOf('"', posStart);
-                    if (posEnd > 0)
+                    html = sr.ReadToEnd();
+                }
+                if (html != "")
+                {
+                    posStart = html.IndexOf("\n[assembly: AssemblyVersion(");
+                    if (posStart > 0)
                     {
-                        version_check = html.Substring(posStart, posEnd - posStart);
-                        if(version_check!="" && version_check != gui_version)
+                        posStart += 29;
+                        posEnd = html.IndexOf('"', posStart);
+                        if (posEnd > 0)
                         {
-                            MessageBox.Show(langStr["version"] + " " + version_check + " " + langStr["is_available"]);
-                        }
-                        else
-                        {
-                            MessageBox.Show(langStr["latest"]);
+                            version_check = html.Substring(posStart, posEnd - posStart);
+                            if (version_check != "" && version_check != gui_version)
+                            {
+                                MessageBox.Show(langStr["version"] + " " + version_check + " " + langStr["is_available"]);
+                            }
+                            else
+                            {
+                                MessageBox.Show(langStr["latest"] + " " + gui_version);
+                            }
                         }
                     }
                 }
-            }
-            else
-            {
+                else
+                {
+                    MessageBox.Show(langStr["unable"]);
+                }
+            } catch {
                 MessageBox.Show(langStr["unable"]);
             }
         }
@@ -634,13 +730,15 @@ namespace SpleeterGui
             chkRPartPiano.Checked = false;
             chkRPartOther.Checked = false;
 
-            if (stem_count == "2")
+            //          || chkSongName.Checked == true
+            if (stem_count == "2"  || chkNIStem.Checked == true)
             {
                 chkRecombine.Checked = false;
                 chkRecombine.Enabled = false;
                 pnlRecombine.Height = 20;
                 pnlMain.Location = new Point(12, 182);
                 this.Height = 677;
+                // this.Height = 677;
             }
             else
             {
@@ -651,12 +749,14 @@ namespace SpleeterGui
                     pnlRecombine.Height = 50;
                     pnlMain.Location = new Point(12, 202);
                     this.Height = 697;
+                    // this.Height = 697;
                 }
                 else
                 {
                     pnlRecombine.Height = 20;
                     pnlMain.Location = new Point(12, 182);
                     this.Height = 677;
+                    // this.Height = 677;
 
                     chkRPartVocal.Checked = false;
                     chkRPartBass.Checked = false;
@@ -688,6 +788,165 @@ namespace SpleeterGui
         {
             Properties.Settings.Default.duration = Convert.ToInt32(duration.Value);
             Properties.Settings.Default.Save();
+        }
+
+        private void chkSongName_CheckedChanged(object sender, EventArgs e)
+        {
+            //EMPTY!!!!
+            //update_checks();
+        }
+
+        private void chkNIStem_CheckedChanged(object sender, EventArgs e)
+        {
+            update_checks();
+            if (chkNIStem.Checked == true)
+            {
+                chkRecombine.Enabled = false;
+                chkSongName.Enabled = false;
+                chkSongName.Checked = true;     // Probably not necessary
+                cmbBox_codec.SelectedIndex = 3; // Set codec m4a
+                cmbBox_codec.Enabled = false;
+
+                parts_btn2.Enabled = false;
+                parts_btn4.Enabled = false;
+                parts_btn5.Enabled = false;
+
+                //set the stem mode to 4
+                parts_label.Text = langStr["vocal_bass_drums_other"];
+                parts_btn2.UseVisualStyleBackColor = true;
+                parts_btn4.UseVisualStyleBackColor = false;
+                parts_btn5.UseVisualStyleBackColor = true;
+                stem_count = "4";
+
+
+            }
+            else
+            {
+                //chkRecombine.Enabled = true;
+                chkSongName.Enabled = true;
+                cmbBox_codec.Enabled = true;
+                parts_btn2.Enabled = true;
+                parts_btn4.Enabled = true;
+                parts_btn5.Enabled = true;
+            }
+        }
+
+        private void run_NIStem(String args)
+        {
+            run_ffmpeg(current_song);
+
+            args = "create -x " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - mix.wav" + (char)34 + " -s " +
+                (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - vocals." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34 + " " +
+                (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - drums." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34 + " " +
+                (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - bass." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34 + " " +
+                (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - other." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34 + " " +
+                "-m " + (char)34 + storage + @"\ni-stem\ni-stem-metadata.json" + (char)34 + " -o " + (char)34 + txt_output_directory.Text + @"\" + current_songname + ".stem." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34;
+
+
+            textBox1.AppendText("\r\n" + (storage + @"\ni-stem\ni-stem.exe") + "\r\n");
+            textBox1.AppendText("\r\n" + File.Exists(storage + @"\ni-stem\ni-stem.exe") + "\r\n");
+
+            ProcessStartInfo processStartInfo = new ProcessStartInfo(storage + @"\ni-stem\ni-stem.exe", args);
+            processStartInfo.WorkingDirectory = storage;
+
+            processStartInfo.UseShellExecute = false;
+            processStartInfo.ErrorDialog = false;
+            processStartInfo.RedirectStandardOutput = true;
+            processStartInfo.RedirectStandardError = true;
+            processStartInfo.CreateNoWindow = true;
+            Process process = new Process();
+            process.StartInfo = processStartInfo;
+            process.EnableRaisingEvents = true;
+            process.Exited += new EventHandler(run_niStemExited);
+            process.OutputDataReceived += new DataReceivedEventHandler(OutputHandler);
+            process.ErrorDataReceived += new DataReceivedEventHandler(ErrorHandler);
+            bool processStarted = process.Start();
+            process.BeginOutputReadLine();
+            process.BeginErrorReadLine();
+        }
+
+        private void run_ffmpeg(String filename)
+        {
+            run_ffmpegAudio(filename);
+            //run_ffmpegCover(filename);      // Not currently used
+            //run_ffmpegMetadata(filename);   // Not currently used
+        }
+
+        private void run_ffmpegCover(String filename)
+        {
+            //ALBUM COVER
+            String args = "-y -i " + (char)34 + filename + (char)34 + " " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + ".jpg" + (char)34;
+
+            ProcessStartInfo processStartInfo = new ProcessStartInfo(storage + @"\ffmpeg.exe", args);
+            processStartInfo.WorkingDirectory = storage;
+
+            processStartInfo.UseShellExecute = false;
+            processStartInfo.ErrorDialog = false;
+            processStartInfo.RedirectStandardOutput = true;
+            processStartInfo.RedirectStandardError = true;
+            processStartInfo.CreateNoWindow = true;
+            Process process = new Process();
+            process.StartInfo = processStartInfo;
+            process.EnableRaisingEvents = true;
+            process.Exited += new EventHandler(run_ffmpegExited);
+            process.OutputDataReceived += new DataReceivedEventHandler(OutputHandler);
+            process.ErrorDataReceived += new DataReceivedEventHandler(ErrorHandler);
+            bool processStarted = process.Start();
+            process.BeginOutputReadLine();
+            process.BeginErrorReadLine();
+
+            textBox1.AppendText("\r\n" + ("COVER DONE!") + "\r\n");
+        }
+
+        private void run_ffmpegMetadata(String filename)
+        {
+            //METADATA
+            String args = "-y -i " + (char)34 + filename + (char)34 + " -f ffmetadata " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + ".txt" + (char)34;
+
+            ProcessStartInfo processStartInfo = new ProcessStartInfo(storage + @"\ffmpeg.exe", args);
+            processStartInfo.WorkingDirectory = storage;
+
+            processStartInfo.UseShellExecute = false;
+            processStartInfo.ErrorDialog = false;
+            processStartInfo.RedirectStandardOutput = true;
+            processStartInfo.RedirectStandardError = true;
+            processStartInfo.CreateNoWindow = true;
+            Process process = new Process();
+            process.StartInfo = processStartInfo;
+            process.EnableRaisingEvents = true;
+            process.Exited += new EventHandler(run_ffmpegExited);
+            process.OutputDataReceived += new DataReceivedEventHandler(OutputHandler);
+            process.ErrorDataReceived += new DataReceivedEventHandler(ErrorHandler);
+            bool processStarted = process.Start();
+            process.BeginOutputReadLine();
+            process.BeginErrorReadLine();
+
+            textBox1.AppendText("\r\n" + ("METADATA DONE!") + "\r\n");
+        }
+
+        private void run_ffmpegAudio(String filename)
+        {
+            String args = "-y -i " + (char)34 + filename + (char)34 + " " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - mix.wav" + (char)34;
+
+            ProcessStartInfo processStartInfo = new ProcessStartInfo(storage + @"\ffmpeg.exe", args);
+            processStartInfo.WorkingDirectory = storage;
+
+            processStartInfo.UseShellExecute = false;
+            processStartInfo.ErrorDialog = false;
+            processStartInfo.RedirectStandardOutput = true;
+            processStartInfo.RedirectStandardError = true;
+            processStartInfo.CreateNoWindow = true;
+            Process process = new Process();
+            process.StartInfo = processStartInfo;
+            process.EnableRaisingEvents = true;
+            process.Exited += new EventHandler(run_ffmpegExited);
+            process.OutputDataReceived += new DataReceivedEventHandler(OutputHandler);
+            process.ErrorDataReceived += new DataReceivedEventHandler(ErrorHandler);
+            bool processStarted = process.Start();
+            process.BeginOutputReadLine();
+            process.BeginErrorReadLine();
+
+            textBox1.AppendText("\r\n" + ("AUDIO DONE!") + "\r\n");
         }
     }
 }
