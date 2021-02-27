@@ -8,11 +8,17 @@ Windows Desktop Front end for [Spleeter](https://github.com/deezer/spleeter) - A
 2. Download and install [SpleeterCore](https://github.com/thooore/SpleeterCore)
 3. Start SpleeterGUI
 4. In SpleeterGUI select ***Advanced > Set SpleeterGUI path*** and select the path to where you unzipped SpleeterCore (The `root_folder.txt` of SpleeterCore should be in that folder)
-5. SpleeterGUI should now be work!
+5. SpleeterGUI should now be able to run!
 
 
 This repository is a fork of the original [SpleeterGUI](https://github.com/boy1dr/SpleeterGui/) which can be downloaded from [here](https://makenweb.com/SpleeterGUI) and has a [FAQ](https://makenweb.com/spleeter_help) that is still relevant
    
+---
+This new version (3.0) has some additional features:
+- Generate [NI Stems](https://www.native-instruments.com/en/specials/stems/) for use in programs such as Traktor
+- Different output formats
+- Auto-name output files
+
 ---
 
 No need to install python or spleeter, this app contains a portable version of python pre-loaded with Spleeter.  
