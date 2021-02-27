@@ -8,7 +8,7 @@ Windows Desktop Front end for [Spleeter](https://github.com/deezer/spleeter) - A
 2. Download and install [SpleeterCore](https://github.com/thooore/SpleeterCore)
 3. Start SpleeterGUI
 4. In SpleeterGUI select ***Advanced > Set SpleeterGUI path*** and select the path to where you unzipped SpleeterCore (The `root_folder.txt` of SpleeterCore should be in that folder)
-5. SpleeterGUI should now be able to run!
+5. Restart SpleeterGUI
 
 
 This repository is a fork of the original [SpleeterGUI](https://github.com/boy1dr/SpleeterGui/) which can be downloaded from [here](https://makenweb.com/SpleeterGUI) and has a [FAQ](https://makenweb.com/spleeter_help) that is still relevant
