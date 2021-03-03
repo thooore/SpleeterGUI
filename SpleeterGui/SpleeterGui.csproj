@@ -161,6 +161,8 @@
       <SubType>Designer</SubType>
     </Content>
     <None Include="Resources\649656_global_32x32.jpg" />
+    <None Include="Resources\stems_logo_full.png" />
+    <None Include="Resources\stems_logo_stripes.png" />
     <Content Include="spleeter_icon.ico" />
   </ItemGroup>
   <ItemGroup />

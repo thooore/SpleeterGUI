@@ -72,18 +72,23 @@ namespace SpleeterGui
             this.lblMaxLength = new System.Windows.Forms.Label();
             this.chkRecombine = new System.Windows.Forms.CheckBox();
             this.pnlRecombine = new System.Windows.Forms.Panel();
-            this.chkNIStem = new System.Windows.Forms.CheckBox();
             this.chkRPartOther = new System.Windows.Forms.CheckBox();
             this.chkRPartPiano = new System.Windows.Forms.CheckBox();
             this.chkRPartDrums = new System.Windows.Forms.CheckBox();
             this.chkRPartBass = new System.Windows.Forms.CheckBox();
             this.chkRPartVocal = new System.Windows.Forms.CheckBox();
+            this.chkNIStem = new System.Windows.Forms.CheckBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.chkNIStemTwoStems = new System.Windows.Forms.CheckBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             this.pnlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.duration)).BeginInit();
             this.pnlRecombine.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // stems2
@@ -117,7 +122,7 @@ namespace SpleeterGui
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(522, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(522, 24);
             this.menuStrip1.TabIndex = 9;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -126,7 +131,7 @@ namespace SpleeterGui
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 24);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // exitToolStripMenuItem
@@ -138,9 +143,8 @@ namespace SpleeterGui
             // 
             // mnuLanguage
             // 
-            this.mnuLanguage.Image = global::SpleeterGui.Properties.Resources._649656_global_32x32;
             this.mnuLanguage.Name = "mnuLanguage";
-            this.mnuLanguage.Size = new System.Drawing.Size(91, 24);
+            this.mnuLanguage.Size = new System.Drawing.Size(71, 20);
             this.mnuLanguage.Text = "Language";
             // 
             // advancedToolStripMenuItem
@@ -148,7 +152,7 @@ namespace SpleeterGui
             this.advancedToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.setPythonPathToolStripMenuItem1});
             this.advancedToolStripMenuItem.Name = "advancedToolStripMenuItem";
-            this.advancedToolStripMenuItem.Size = new System.Drawing.Size(72, 24);
+            this.advancedToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
             this.advancedToolStripMenuItem.Text = "Advanced";
             // 
             // setPythonPathToolStripMenuItem1
@@ -168,7 +172,7 @@ namespace SpleeterGui
             this.spleeterGithubPageToolStripMenuItem,
             this.makenItSoToolStripMenuItem1});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "&Help";
             // 
             // helpFAQToolStripMenuItem
@@ -428,6 +432,7 @@ namespace SpleeterGui
             // 
             // pnlMain
             // 
+            this.pnlMain.Controls.Add(this.panel1);
             this.pnlMain.Controls.Add(this.chkSongName);
             this.pnlMain.Controls.Add(this.codec_label);
             this.pnlMain.Controls.Add(this.cmbBox_codec);
@@ -445,7 +450,7 @@ namespace SpleeterGui
             this.pnlMain.Controls.Add(this.progressBar1);
             this.pnlMain.Location = new System.Drawing.Point(12, 182);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(504, 445);
+            this.pnlMain.Size = new System.Drawing.Size(504, 504);
             this.pnlMain.TabIndex = 37;
             // 
             // chkSongName
@@ -541,7 +546,6 @@ namespace SpleeterGui
             // 
             // pnlRecombine
             // 
-            this.pnlRecombine.Controls.Add(this.chkNIStem);
             this.pnlRecombine.Controls.Add(this.chkRPartOther);
             this.pnlRecombine.Controls.Add(this.chkRecombine);
             this.pnlRecombine.Controls.Add(this.chkRPartPiano);
@@ -552,19 +556,6 @@ namespace SpleeterGui
             this.pnlRecombine.Name = "pnlRecombine";
             this.pnlRecombine.Size = new System.Drawing.Size(493, 14);
             this.pnlRecombine.TabIndex = 39;
-            // 
-            // chkNIStem
-            // 
-            this.chkNIStem.AccessibleDescription = "Runs a script that generates a Native Instruments stem file";
-            this.chkNIStem.AccessibleName = "Generate NI Stem";
-            this.chkNIStem.AutoSize = true;
-            this.chkNIStem.Location = new System.Drawing.Point(299, 3);
-            this.chkNIStem.Name = "chkNIStem";
-            this.chkNIStem.Size = new System.Drawing.Size(111, 17);
-            this.chkNIStem.TabIndex = 40;
-            this.chkNIStem.Text = "Generate NI Stem";
-            this.chkNIStem.UseVisualStyleBackColor = true;
-            this.chkNIStem.CheckedChanged += new System.EventHandler(this.chkNIStem_CheckedChanged);
             // 
             // chkRPartOther
             // 
@@ -621,6 +612,19 @@ namespace SpleeterGui
             this.chkRPartVocal.Text = "Vocal";
             this.chkRPartVocal.UseVisualStyleBackColor = true;
             // 
+            // chkNIStem
+            // 
+            this.chkNIStem.AccessibleDescription = "Runs a script that generates a Native Instruments stem file from 4 stems";
+            this.chkNIStem.AccessibleName = "Generate NI Stem";
+            this.chkNIStem.AutoSize = true;
+            this.chkNIStem.Location = new System.Drawing.Point(14, 3);
+            this.chkNIStem.Name = "chkNIStem";
+            this.chkNIStem.Size = new System.Drawing.Size(111, 17);
+            this.chkNIStem.TabIndex = 40;
+            this.chkNIStem.Text = "Generate NI Stem";
+            this.chkNIStem.UseVisualStyleBackColor = true;
+            this.chkNIStem.CheckedChanged += new System.EventHandler(this.chkNIStem_CheckedChanged);
+            // 
             // pictureBox1
             // 
             this.pictureBox1.AccessibleDescription = "Spleeter logo";
@@ -633,13 +637,49 @@ namespace SpleeterGui
             this.pictureBox1.TabIndex = 22;
             this.pictureBox1.TabStop = false;
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.pictureBox2);
+            this.panel1.Controls.Add(this.chkNIStemTwoStems);
+            this.panel1.Controls.Add(this.chkNIStem);
+            this.panel1.Location = new System.Drawing.Point(0, 453);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(504, 48);
+            this.panel1.TabIndex = 41;
+            // 
+            // chkNIStemTwoStems
+            // 
+            this.chkNIStemTwoStems.AccessibleDescription = "Runs a script that generates a Native Instruments stem file from 2 stems";
+            this.chkNIStemTwoStems.AccessibleName = "Generate NI Stem";
+            this.chkNIStemTwoStems.AutoSize = true;
+            this.chkNIStemTwoStems.Location = new System.Drawing.Point(14, 26);
+            this.chkNIStemTwoStems.Name = "chkNIStemTwoStems";
+            this.chkNIStemTwoStems.Size = new System.Drawing.Size(205, 17);
+            this.chkNIStemTwoStems.TabIndex = 41;
+            this.chkNIStemTwoStems.Text = "Generate NI Container from two stems";
+            this.chkNIStemTwoStems.UseVisualStyleBackColor = true;
+            this.chkNIStemTwoStems.CheckedChanged += new System.EventHandler(this.chkNIStemTwoStems_CheckedChanged);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.AccessibleDescription = "Spleeter logo";
+            this.pictureBox2.AccessibleName = "Spleeter logo";
+            this.pictureBox2.AccessibleRole = System.Windows.Forms.AccessibleRole.Graphic;
+            this.pictureBox2.Image = global::SpleeterGui.Properties.Resources.stems_logo_full;
+            this.pictureBox2.Location = new System.Drawing.Point(265, 8);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(227, 32);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox2.TabIndex = 42;
+            this.pictureBox2.TabStop = false;
+            // 
             // Form1
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(522, 628);
+            this.ClientSize = new System.Drawing.Size(522, 698);
             this.Controls.Add(this.pnlRecombine);
             this.Controls.Add(this.pnlMain);
             this.Controls.Add(this.parts_label);
@@ -672,6 +712,9 @@ namespace SpleeterGui
             this.pnlRecombine.ResumeLayout(false);
             this.pnlRecombine.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -728,6 +771,9 @@ namespace SpleeterGui
         private System.Windows.Forms.CheckBox chkSongName;
         private System.Windows.Forms.ComboBox cmbBox_codec;
         private System.Windows.Forms.CheckBox chkNIStem;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.CheckBox chkNIStemTwoStems;
     }
 }
 

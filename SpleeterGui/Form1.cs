@@ -394,6 +394,19 @@ namespace SpleeterGui
             //cleanup function called by run_ffmpeg
             Invoke((Action)(() =>
             {
+                if (chkNIStemTwoStems.Checked)
+                {
+                    run_ffmpegTwoStemMakerRunner(current_songname);
+                }
+                run_NIStem();
+            }));
+        }
+
+        private void run_doNothingOnExit(object sender, EventArgs e)
+        {
+            //cleanup function
+            Invoke((Action)(() =>
+            {
                 //do nothing
             }));
         }
@@ -432,7 +445,7 @@ namespace SpleeterGui
             //called by run_cmd when thread exits after spleeting a song. runs the recombine (if enabled) and starts processing next song in queue.
             Invoke((Action)(() =>
             {
-                if (chkNIStem.Checked == false)
+                if (chkNIStem.Checked == false && chkNIStemTwoStems.Checked == false)
                 {
                     //recombine audio (if enabled)
                     if (
@@ -508,8 +521,15 @@ namespace SpleeterGui
                 {
                     if (files_remain > 0)
                     {
-                        run_NIStem("");
+                        NIStemRunner();
 
+                    }
+                }
+                if (chkNIStemTwoStems.Checked == true)
+                {
+                    if (files_remain > 0)
+                    {
+                        NIStemRunner();
                     }
                 }
             }));
@@ -737,7 +757,8 @@ namespace SpleeterGui
                 chkRecombine.Enabled = false;
                 pnlRecombine.Height = 20;
                 pnlMain.Location = new Point(12, 182);
-                this.Height = 677;
+                this.Height = 737;
+                // Project height default in Designer: 667
                 // this.Height = 677;
             }
             else
@@ -748,14 +769,14 @@ namespace SpleeterGui
                 {
                     pnlRecombine.Height = 50;
                     pnlMain.Location = new Point(12, 202);
-                    this.Height = 697;
+                    this.Height = 757;
                     // this.Height = 697;
                 }
                 else
                 {
                     pnlRecombine.Height = 20;
                     pnlMain.Location = new Point(12, 182);
-                    this.Height = 677;
+                    this.Height = 737;
                     // this.Height = 677;
 
                     chkRPartVocal.Checked = false;
@@ -796,11 +817,49 @@ namespace SpleeterGui
             //update_checks();
         }
 
+        private void chkNIStemTwoStems_CheckedChanged(object sender, EventArgs e)
+        {
+
+            if (chkNIStemTwoStems.Checked == true)
+            {
+                chkNIStem.Checked = false;
+                chkRecombine.Enabled = false;
+                chkSongName.Enabled = false;
+                chkSongName.Checked = true;     // Probably not necessary
+                cmbBox_codec.SelectedIndex = 3; // Set codec m4a
+                cmbBox_codec.Enabled = false;
+
+                parts_btn2.Enabled = false;
+                parts_btn4.Enabled = false;
+                parts_btn5.Enabled = false;
+
+                //set the stem mode to 2
+                parts_label.Text = langStr["vocal_accompaniment"];
+                parts_btn2.UseVisualStyleBackColor = false;
+                parts_btn4.UseVisualStyleBackColor = true;
+                parts_btn5.UseVisualStyleBackColor = true;
+                stem_count = "2";
+
+
+            }
+            else
+            {
+                //chkRecombine.Enabled = true;
+                chkSongName.Enabled = true;
+                cmbBox_codec.Enabled = true;
+                parts_btn2.Enabled = true;
+                parts_btn4.Enabled = true;
+                parts_btn5.Enabled = true;
+            }
+            update_checks();
+        }
+
         private void chkNIStem_CheckedChanged(object sender, EventArgs e)
         {
             update_checks();
             if (chkNIStem.Checked == true)
             {
+                chkNIStemTwoStems.Checked = false;
                 chkRecombine.Enabled = false;
                 chkSongName.Enabled = false;
                 chkSongName.Checked = true;     // Probably not necessary
@@ -831,11 +890,15 @@ namespace SpleeterGui
             }
         }
 
-        private void run_NIStem(String args)
+        private void NIStemRunner()
         {
             run_ffmpeg(current_song);
+        }
 
-            args = "create -x " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - mix.wav" + (char)34 + " -s " +
+        private void run_NIStem()
+        {
+
+            String args = "create -x " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - mix.wav" + (char)34 + " -s " +
                 (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - vocals." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34 + " " +
                 (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - drums." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34 + " " +
                 (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - bass." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34 + " " +
@@ -888,7 +951,7 @@ namespace SpleeterGui
             Process process = new Process();
             process.StartInfo = processStartInfo;
             process.EnableRaisingEvents = true;
-            process.Exited += new EventHandler(run_ffmpegExited);
+            process.Exited += new EventHandler(run_doNothingOnExit);
             process.OutputDataReceived += new DataReceivedEventHandler(OutputHandler);
             process.ErrorDataReceived += new DataReceivedEventHandler(ErrorHandler);
             bool processStarted = process.Start();
@@ -914,7 +977,7 @@ namespace SpleeterGui
             Process process = new Process();
             process.StartInfo = processStartInfo;
             process.EnableRaisingEvents = true;
-            process.Exited += new EventHandler(run_ffmpegExited);
+            process.Exited += new EventHandler(run_doNothingOnExit);
             process.OutputDataReceived += new DataReceivedEventHandler(OutputHandler);
             process.ErrorDataReceived += new DataReceivedEventHandler(ErrorHandler);
             bool processStarted = process.Start();
@@ -948,5 +1011,85 @@ namespace SpleeterGui
 
             textBox1.AppendText("\r\n" + ("AUDIO DONE!") + "\r\n");
         }
+
+        private void run_ffmpegTwoStemMakerRunner(String filename)
+        {
+            run_ffmpegSilenceMakerDrums(filename);
+            run_ffmpegSilenceMakerBass(filename);
+            run_ffmpegTwoStemMakerOther(filename);
+        }
+
+        private void run_ffmpegSilenceMakerDrums(String filename)
+        {
+            String args = "-y -i " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - mix.wav" + (char)34
+                + " -filter:a \"volume=0\" " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - drums." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34;
+
+            // .\ffmpeg.exe -i "D:\audio_output\Camila Cabello - Should've Said It\Camila Cabello - Should've Said It - mix.m4a" -filter:a "volume=0" "D:\audio_output\output.m4a"
+
+            ProcessStartInfo processStartInfo = new ProcessStartInfo(storage + @"\ffmpeg.exe", args);
+            processStartInfo.WorkingDirectory = storage;
+
+            processStartInfo.UseShellExecute = false;
+            processStartInfo.ErrorDialog = false;
+            processStartInfo.RedirectStandardOutput = true;
+            processStartInfo.RedirectStandardError = true;
+            processStartInfo.CreateNoWindow = true;
+            Process process = new Process();
+            process.StartInfo = processStartInfo;
+            process.EnableRaisingEvents = true;
+            process.Exited += new EventHandler(run_doNothingOnExit);
+            process.OutputDataReceived += new DataReceivedEventHandler(OutputHandler);
+            process.ErrorDataReceived += new DataReceivedEventHandler(ErrorHandler);
+            bool processStarted = process.Start();
+            process.BeginOutputReadLine();
+            process.BeginErrorReadLine();
+
+            textBox1.AppendText("\r\n" + ("DRUMS SILENCE DONE!") + "\r\n");
+        }
+
+        private void run_ffmpegSilenceMakerBass(String filename)
+        {
+            String args = "-y -i " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - mix.wav" + (char)34
+                + " -filter:a \"volume=0\" " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - bass." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34;
+
+            // .\ffmpeg.exe -i "D:\audio_output\Camila Cabello - Should've Said It\Camila Cabello - Should've Said It - mix.m4a" -filter:a "volume=0" "D:\audio_output\output.m4a"
+
+            ProcessStartInfo processStartInfo = new ProcessStartInfo(storage + @"\ffmpeg.exe", args);
+            processStartInfo.WorkingDirectory = storage;
+
+            processStartInfo.UseShellExecute = false;
+            processStartInfo.ErrorDialog = false;
+            processStartInfo.RedirectStandardOutput = true;
+            processStartInfo.RedirectStandardError = true;
+            processStartInfo.CreateNoWindow = true;
+            Process process = new Process();
+            process.StartInfo = processStartInfo;
+            process.EnableRaisingEvents = true;
+            process.Exited += new EventHandler(run_doNothingOnExit);
+            process.OutputDataReceived += new DataReceivedEventHandler(OutputHandler);
+            process.ErrorDataReceived += new DataReceivedEventHandler(ErrorHandler);
+            bool processStarted = process.Start();
+            process.BeginOutputReadLine();
+            process.BeginErrorReadLine();
+
+            textBox1.AppendText("\r\n" + ("BASS SILENCE DONE!") + "\r\n");
+        }
+
+        private void run_ffmpegTwoStemMakerOther(String filename)
+        {
+            if (File.Exists(txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - other." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem)))
+            {
+                File.Delete(txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - other." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem));
+            }
+
+
+            File.Move(
+                txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - accompaniment." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem),
+                txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - other." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem));
+
+            textBox1.AppendText("\r\n" + ("RENAME ACCOMPANIMENT DONE!") + "\r\n");
+        }
+
+
     }
 }

@@ -124,4 +124,10 @@
   <data name="649656_global_32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\649656_global_32x32.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="stems_logo_full" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\stems_logo_full.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="stems_logo_stripes" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\stems_logo_stripes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
