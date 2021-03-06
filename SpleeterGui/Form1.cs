@@ -397,6 +397,7 @@ namespace SpleeterGui
                 if (chkNIStemTwoStems.Checked)
                 {
                     run_ffmpegTwoStemMakerRunner(current_songname);
+                    //This structure is really spaghetti, should be refactored
                 }
                 run_NIStem();
             }));
@@ -517,19 +518,13 @@ namespace SpleeterGui
                         System.Media.SystemSounds.Beep.Play();
                     }
                 }
-                if (chkNIStem.Checked == true)
+                if (chkNIStem.Checked == true || chkNIStemTwoStems.Checked == true)
+                // Should maybe be two different if statements if you want it to behave differently
                 {
                     if (files_remain > 0)
                     {
                         NIStemRunner();
 
-                    }
-                }
-                if (chkNIStemTwoStems.Checked == true)
-                {
-                    if (files_remain > 0)
-                    {
-                        NIStemRunner();
                     }
                 }
             }));
