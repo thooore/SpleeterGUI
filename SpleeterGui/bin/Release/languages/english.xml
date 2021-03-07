@@ -65,6 +65,6 @@
     <lang english="You are using the latest version" control="latest">You are using the latest version</lang>
     <lang english="Unable get new version data, check internet connection" control="unable">Unable get new version data, check internet connection</lang>
     <lang english="Choose output location" control="set_output">Choose output location</lang>
-    <lang english="Choose location of root_folder.txt" control="set_python_path">Choose location of root_folder.txt</lang>
+    <lang english="Choose location of Spleeter Core" control="set_python_path">Choose location of Spleeter Core</lang>
 	<lang english="You are running the latest version" control="latest">You are running the latest version</lang>
 </root>

@@ -95,7 +95,7 @@ namespace SpleeterGui
             textBox1.Text = txt + "...\r\n";
             run_cmd("pip show spleeter");
 
-            textBox1.AppendText(System.Environment.CurrentDirectory + "\r\n");
+            textBox1.AppendText(storage + "\r\n");
         }
 
         void get_languages()
@@ -908,8 +908,6 @@ namespace SpleeterGui
                 "-m " + (char)34 + storage + @"\ni-stem\ni-stem-metadata.json" + (char)34 + " -o " + (char)34 + txt_output_directory.Text + @"\" + current_songname + ".stem." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34;
 
 
-            textBox1.AppendText("\r\n" + (storage + @"\ni-stem\ni-stem.exe") + "\r\n");
-            textBox1.AppendText("\r\n" + File.Exists(storage + @"\ni-stem\ni-stem.exe") + "\r\n");
 
             ProcessStartInfo processStartInfo = new ProcessStartInfo(storage + @"\ni-stem\ni-stem.exe", args);
             processStartInfo.WorkingDirectory = storage;
