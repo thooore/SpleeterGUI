@@ -19,7 +19,7 @@ using System.Xml;
 
 /* TODO:
  * Make the panels a groupbox and disable all of them when running, so the user can't screw things up
- * 
+ * Refactor the Stem-building and ffmpeg stuff
  * 
  * 
  * */

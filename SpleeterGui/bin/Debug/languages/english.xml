@@ -39,6 +39,7 @@
 	<item english="Output codec" control="codec_label">Output codec</item>
 	<item english="Write input name to output files" control="chkSongName">Write input name to output files</item>
 	<item english="Generate NI Stem" control="chkNIStem">Generate NI Stem</item>
+	<item english="Generate NI Container from two stems" control="chkNIStemTwoStems">Generate NI Container from two stems</item>
 
 
 
