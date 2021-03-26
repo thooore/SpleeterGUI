@@ -82,6 +82,7 @@ namespace SpleeterGui
             this.chkRPartBass = new System.Windows.Forms.CheckBox();
             this.chkRPartVocal = new System.Windows.Forms.CheckBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.chkStemRemoveFiles = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.pnlMain.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -455,6 +456,7 @@ namespace SpleeterGui
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.chkStemRemoveFiles);
             this.panel1.Controls.Add(this.pictureBox2);
             this.panel1.Controls.Add(this.chkNIStemTwoStems);
             this.panel1.Controls.Add(this.chkNIStem);
@@ -673,6 +675,16 @@ namespace SpleeterGui
             this.pictureBox1.TabIndex = 22;
             this.pictureBox1.TabStop = false;
             // 
+            // chkStemRemoveFiles
+            // 
+            this.chkStemRemoveFiles.AutoSize = true;
+            this.chkStemRemoveFiles.Location = new System.Drawing.Point(128, 3);
+            this.chkStemRemoveFiles.Name = "chkStemRemoveFiles";
+            this.chkStemRemoveFiles.Size = new System.Drawing.Size(133, 17);
+            this.chkStemRemoveFiles.TabIndex = 43;
+            this.chkStemRemoveFiles.Text = "Remove Working Files";
+            this.chkStemRemoveFiles.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AllowDrop = true;
@@ -774,6 +786,7 @@ namespace SpleeterGui
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.CheckBox chkNIStemTwoStems;
+        private System.Windows.Forms.CheckBox chkStemRemoveFiles;
     }
 }
 

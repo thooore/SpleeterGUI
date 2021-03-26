@@ -430,6 +430,10 @@ namespace SpleeterGui
                     // System.Media.SystemSounds.Beep.Play();
                 }
 
+                if (chkStemRemoveFiles.Checked = true)
+                {
+                    RemoveStemFiles();
+                }
 
                 files_remain--;
                 if (files_remain > -1)
@@ -446,6 +450,41 @@ namespace SpleeterGui
                 }
 
             }));
+        }
+
+        private void RemoveStemFiles()
+        {
+            textBox1.AppendText("\r\n" + "Removing working files" + "\r\n");
+
+            if (File.Exists(txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - other." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem)))
+            {
+                File.Delete(txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - other." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem));
+            }
+            if (File.Exists(txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - mix." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem)))
+            {
+                File.Delete(txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - mix." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem));
+            }
+            if (File.Exists(txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - vocals." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem)))
+            {
+                File.Delete(txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - vocals." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem));
+            }
+            if (File.Exists(txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - bass." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem)))
+            {
+                File.Delete(txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - bass." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem));
+            }
+            if (File.Exists(txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - drums." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem)))
+            {
+                File.Delete(txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - drums." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem));
+            }
+            if (!Directory.EnumerateFileSystemEntries(txt_output_directory.Text + @"\" + current_songname).Any())
+            {
+                Directory.Delete(txt_output_directory.Text + @"\" + current_songname);
+            }
+            else
+            {
+                textBox1.AppendText("\r\n" + "Folder: \"" + txt_output_directory.Text + @"\" + current_songname + "\" is not empty! Skipping!" + "\r\n");
+            }
+
         }
 
         private void ProcessExited(object sender, EventArgs e)
