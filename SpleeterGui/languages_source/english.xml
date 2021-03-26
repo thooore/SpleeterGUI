@@ -36,10 +36,11 @@
     <item english="Progress" control="lblProgress">Progress</item>
     <item english="Maximum song length" control="lblMaxLength">Maximum song length</item>
     <item english="seconds" control="lblSeconds">seconds</item>
-	<item english="Output codec" control="codec_label">Output codec</item>
-	<item english="Write input name to output files" control="chkSongName">Write input name to output files</item>
-	<item english="Generate NI Stem" control="chkNIStem">Generate NI Stem</item>
-	<item english="Generate NI Container from two stems" control="chkNIStemTwoStems">Generate NI Container from two stems</item>
+  	<item english="Output codec" control="codec_label">Output codec</item>
+  	<item english="Write input name to output files" control="chkSongName">Write input name to output files</item>
+  	<item english="Generate NI Stem" control="chkNIStem">Generate NI Stem</item>
+  	<item english="Generate NI Container from two stems" control="chkNIStemTwoStems">Generate NI Container from two stems</item>
+    <item english="Remove Working Files" control="chkStemRemoveFiles">Remove Working Files</item>
 
 
 
