@@ -25,7 +25,7 @@ No need to install python or spleeter, this app contains a portable version of p
 
 The aim for this project is to make it easy for Windows users to download and run Spleeter without needing to use the command line tools to do so.  
 
-![SpleeterGUI_app](./Spleeter_GUI.png)  
+![SpleeterGUI_app](./docs/Spleeter_GUI.png)  
 
 This project is a simple C# desktop front end for Spleeter.  
 
@@ -43,3 +43,5 @@ The [SpleeterGUI Core](https://github.com/thooore/SpleeterCore) required to run 
 Feel free to inspect the source code and build for yourself. You can also install your own python/tensorflow/ffmpeg/spleeter.
 
 There can be some bugs with the recombine feature in combination with the auto-naming and codec options. If you encounter a bug, you can leave an issue explaining what happened or a pull request if you want to fix it yourself.
+
+Also huge thanks to the original creator for making such a useful program!

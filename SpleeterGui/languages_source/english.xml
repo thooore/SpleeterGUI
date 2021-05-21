@@ -7,11 +7,11 @@
     <menu english="Help" control="helpToolStripMenuItem">Help</menu>
     <menu english="Help &amp;and FAQ" control="helpFAQToolStripMenuItem">Help &amp;and FAQ</menu>
     <menu english="Check SpleeterGUI updates" control="checkSpleeterGUIUpdateToolStripMenuItem">Check SpleeterGUI updates</menu>
-    <menu english="Spleeter core upgrade" control="spleeterupgradeToolStripMenuItem">Spleeter core upgrade</menu>
-    <menu english="SpleeterGUI github page" control="spleeterGithubPageToolStripMenuItem">SpleeterGUI github page</menu>
-    <menu english="Maken it so Github" control="makenItSoToolStripMenuItem1">Maken it so Github</menu>
+    <menu english="Update Spleeter library" control="spleeterupgradeToolStripMenuItem">Update Spleeter library</menu>
+    <menu english="SpleeterGUI GitHub page" control="spleeterGithubPageToolStripMenuItem">SpleeterGUI GitHub page</menu>
+    <menu english="Maken It So GitHub" control="makenItSoToolStripMenuItem1">Maken It So GitHub</menu>
     <menu english="Advanced" control="advancedToolStripMenuItem">Advanced</menu>
-    <menu english="Set SpleeterGUI path" control="setPythonPathToolStripMenuItem1">Set SpleeterGUI path</menu>
+    <menu english="Set SpleeterGUI Core path" control="setPythonPathToolStripMenuItem1">Set SpleeterGUI Core path</menu>
     <menu english="Set json configs path" control="setJsonConfigsPathToolStripMenuItem1">Set json configs path</menu>
 
   

@@ -41,7 +41,6 @@ namespace SpleeterGui
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpFAQToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkSpleeterGUIUpdateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.spleeterupgradeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.spleeterGithubPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.makenItSoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -65,6 +64,7 @@ namespace SpleeterGui
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.chkStemRemoveFiles = new System.Windows.Forms.CheckBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.chkNIStemTwoStems = new System.Windows.Forms.CheckBox();
             this.chkNIStem = new System.Windows.Forms.CheckBox();
@@ -82,7 +82,7 @@ namespace SpleeterGui
             this.chkRPartBass = new System.Windows.Forms.CheckBox();
             this.chkRPartVocal = new System.Windows.Forms.CheckBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.chkStemRemoveFiles = new System.Windows.Forms.CheckBox();
+            this.spleeterupgradeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.pnlMain.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -138,7 +138,7 @@ namespace SpleeterGui
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -151,7 +151,8 @@ namespace SpleeterGui
             // advancedToolStripMenuItem
             // 
             this.advancedToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.setPythonPathToolStripMenuItem1});
+            this.setPythonPathToolStripMenuItem1,
+            this.spleeterupgradeToolStripMenuItem});
             this.advancedToolStripMenuItem.Name = "advancedToolStripMenuItem";
             this.advancedToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
             this.advancedToolStripMenuItem.Text = "Advanced";
@@ -159,7 +160,7 @@ namespace SpleeterGui
             // setPythonPathToolStripMenuItem1
             // 
             this.setPythonPathToolStripMenuItem1.Name = "setPythonPathToolStripMenuItem1";
-            this.setPythonPathToolStripMenuItem1.Size = new System.Drawing.Size(181, 22);
+            this.setPythonPathToolStripMenuItem1.Size = new System.Drawing.Size(189, 22);
             this.setPythonPathToolStripMenuItem1.Text = "Set SpleeterGUI path";
             this.setPythonPathToolStripMenuItem1.Click += new System.EventHandler(this.setPythonPathToolStripMenuItem1_Click);
             // 
@@ -168,7 +169,6 @@ namespace SpleeterGui
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.helpFAQToolStripMenuItem,
             this.checkSpleeterGUIUpdateToolStripMenuItem,
-            this.spleeterupgradeToolStripMenuItem,
             this.toolStripMenuItem3,
             this.spleeterGithubPageToolStripMenuItem,
             this.makenItSoToolStripMenuItem1});
@@ -189,13 +189,6 @@ namespace SpleeterGui
             this.checkSpleeterGUIUpdateToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.checkSpleeterGUIUpdateToolStripMenuItem.Text = "Check &SpleeterGUI updates";
             this.checkSpleeterGUIUpdateToolStripMenuItem.Click += new System.EventHandler(this.checkSpleeterGUIUpdateToolStripMenuItem_Click);
-            // 
-            // spleeterupgradeToolStripMenuItem
-            // 
-            this.spleeterupgradeToolStripMenuItem.Name = "spleeterupgradeToolStripMenuItem";
-            this.spleeterupgradeToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
-            this.spleeterupgradeToolStripMenuItem.Text = "Spleeter core &upgrade";
-            this.spleeterupgradeToolStripMenuItem.Click += new System.EventHandler(this.spleeterupgradeToolStripMenuItem_Click);
             // 
             // toolStripMenuItem3
             // 
@@ -465,6 +458,16 @@ namespace SpleeterGui
             this.panel1.Size = new System.Drawing.Size(504, 48);
             this.panel1.TabIndex = 41;
             // 
+            // chkStemRemoveFiles
+            // 
+            this.chkStemRemoveFiles.AutoSize = true;
+            this.chkStemRemoveFiles.Location = new System.Drawing.Point(128, 3);
+            this.chkStemRemoveFiles.Name = "chkStemRemoveFiles";
+            this.chkStemRemoveFiles.Size = new System.Drawing.Size(133, 17);
+            this.chkStemRemoveFiles.TabIndex = 43;
+            this.chkStemRemoveFiles.Text = "Remove Working Files";
+            this.chkStemRemoveFiles.UseVisualStyleBackColor = true;
+            // 
             // pictureBox2
             // 
             this.pictureBox2.AccessibleDescription = "Spleeter logo";
@@ -675,15 +678,12 @@ namespace SpleeterGui
             this.pictureBox1.TabIndex = 22;
             this.pictureBox1.TabStop = false;
             // 
-            // chkStemRemoveFiles
+            // spleeterupgradeToolStripMenuItem
             // 
-            this.chkStemRemoveFiles.AutoSize = true;
-            this.chkStemRemoveFiles.Location = new System.Drawing.Point(128, 3);
-            this.chkStemRemoveFiles.Name = "chkStemRemoveFiles";
-            this.chkStemRemoveFiles.Size = new System.Drawing.Size(133, 17);
-            this.chkStemRemoveFiles.TabIndex = 43;
-            this.chkStemRemoveFiles.Text = "Remove Working Files";
-            this.chkStemRemoveFiles.UseVisualStyleBackColor = true;
+            this.spleeterupgradeToolStripMenuItem.Name = "spleeterupgradeToolStripMenuItem";
+            this.spleeterupgradeToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.spleeterupgradeToolStripMenuItem.Text = "Spleeter core &upgrade";
+            this.spleeterupgradeToolStripMenuItem.Click += new System.EventHandler(this.spleeterupgradeToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -763,7 +763,6 @@ namespace SpleeterGui
         private System.Windows.Forms.Button btnSelectFiles;
         private System.Windows.Forms.OpenFileDialog openFileDialog2;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
-        private System.Windows.Forms.ToolStripMenuItem spleeterupgradeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem checkSpleeterGUIUpdateToolStripMenuItem;
         private System.Windows.Forms.Panel pnlMain;
         private System.Windows.Forms.CheckBox chkRecombine;
@@ -787,6 +786,7 @@ namespace SpleeterGui
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.CheckBox chkNIStemTwoStems;
         private System.Windows.Forms.CheckBox chkStemRemoveFiles;
+        private System.Windows.Forms.ToolStripMenuItem spleeterupgradeToolStripMenuItem;
     }
 }
 

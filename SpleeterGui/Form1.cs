@@ -759,7 +759,7 @@ namespace SpleeterGui
                             version_check = html.Substring(posStart, posEnd - posStart);
                             if (version_check != "" && version_check != gui_version)
                             {
-                                MessageBox.Show(langStr["version"] + " " + version_check + " " + langStr["is_available"]);
+                                MessageBox.Show(langStr["version"] + " " + version_check + " " + langStr["is_available"] + "\n" + "Current version: " + gui_version);
                             }
                             else
                             {
@@ -939,32 +939,40 @@ namespace SpleeterGui
         private void run_NIStem()
         {
 
-            String args = "create -x " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - mix.wav" + (char)34 + " -s " +
-                (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - vocals." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34 + " " +
-                (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - drums." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34 + " " +
-                (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - bass." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34 + " " +
-                (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - other." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34 + " " +
-                "-m " + (char)34 + storage + @"\ni-stem\ni-stem-metadata.json" + (char)34 + " -o " + (char)34 + txt_output_directory.Text + @"\" + current_songname + ".stem." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34;
+            if (File.Exists(storage + @"\ni-stem\ni-stem.exe"))
+            {
+
+                String args = "create -x " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - mix.wav" + (char)34 + " -s " +
+                    (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - vocals." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34 + " " +
+                    (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - drums." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34 + " " +
+                    (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - bass." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34 + " " +
+                    (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - other." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34 + " " +
+                    "-m " + (char)34 + storage + @"\ni-stem\ni-stem-metadata.json" + (char)34 + " -o " + (char)34 + txt_output_directory.Text + @"\" + current_songname + ".stem." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34;
 
 
 
-            ProcessStartInfo processStartInfo = new ProcessStartInfo(storage + @"\ni-stem\ni-stem.exe", args);
-            processStartInfo.WorkingDirectory = storage;
+                ProcessStartInfo processStartInfo = new ProcessStartInfo(storage + @"\ni-stem\ni-stem.exe", args);
+                processStartInfo.WorkingDirectory = storage;
 
-            processStartInfo.UseShellExecute = false;
-            processStartInfo.ErrorDialog = false;
-            processStartInfo.RedirectStandardOutput = true;
-            processStartInfo.RedirectStandardError = true;
-            processStartInfo.CreateNoWindow = true;
-            Process process = new Process();
-            process.StartInfo = processStartInfo;
-            process.EnableRaisingEvents = true;
-            process.Exited += new EventHandler(run_niStemExited);
-            process.OutputDataReceived += new DataReceivedEventHandler(OutputHandler);
-            process.ErrorDataReceived += new DataReceivedEventHandler(ErrorHandler);
-            bool processStarted = process.Start();
-            process.BeginOutputReadLine();
-            process.BeginErrorReadLine();
+                processStartInfo.UseShellExecute = false;
+                processStartInfo.ErrorDialog = false;
+                processStartInfo.RedirectStandardOutput = true;
+                processStartInfo.RedirectStandardError = true;
+                processStartInfo.CreateNoWindow = true;
+                Process process = new Process();
+                process.StartInfo = processStartInfo;
+                process.EnableRaisingEvents = true;
+                process.Exited += new EventHandler(run_niStemExited);
+                process.OutputDataReceived += new DataReceivedEventHandler(OutputHandler);
+                process.ErrorDataReceived += new DataReceivedEventHandler(ErrorHandler);
+                bool processStarted = process.Start();
+                process.BeginOutputReadLine();
+                process.BeginErrorReadLine();
+            }
+            else
+            {
+                textBox1.AppendText("\r\n" + ("Error: ni-stem.exe not found!") + "\r\n");
+            }
         }
 
         private void run_ffmpeg(String filename)
@@ -974,57 +982,57 @@ namespace SpleeterGui
             //run_ffmpegMetadata(filename);   // Not currently used
         }
 
-        private void run_ffmpegCover(String filename)
-        {
-            //ALBUM COVER
-            String args = "-y -i " + (char)34 + filename + (char)34 + " " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + ".jpg" + (char)34;
+        //private void run_ffmpegCover(String filename)
+        //{
+        //    //ALBUM COVER
+        //    String args = "-y -i " + (char)34 + filename + (char)34 + " " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + ".jpg" + (char)34;
 
-            ProcessStartInfo processStartInfo = new ProcessStartInfo(storage + @"\ffmpeg.exe", args);
-            processStartInfo.WorkingDirectory = storage;
+        //    ProcessStartInfo processStartInfo = new ProcessStartInfo(storage + @"\ffmpeg.exe", args);
+        //    processStartInfo.WorkingDirectory = storage;
 
-            processStartInfo.UseShellExecute = false;
-            processStartInfo.ErrorDialog = false;
-            processStartInfo.RedirectStandardOutput = true;
-            processStartInfo.RedirectStandardError = true;
-            processStartInfo.CreateNoWindow = true;
-            Process process = new Process();
-            process.StartInfo = processStartInfo;
-            process.EnableRaisingEvents = true;
-            process.Exited += new EventHandler(run_doNothingOnExit);
-            process.OutputDataReceived += new DataReceivedEventHandler(OutputHandler);
-            process.ErrorDataReceived += new DataReceivedEventHandler(ErrorHandler);
-            bool processStarted = process.Start();
-            process.BeginOutputReadLine();
-            process.BeginErrorReadLine();
+        //    processStartInfo.UseShellExecute = false;
+        //    processStartInfo.ErrorDialog = false;
+        //    processStartInfo.RedirectStandardOutput = true;
+        //    processStartInfo.RedirectStandardError = true;
+        //    processStartInfo.CreateNoWindow = true;
+        //    Process process = new Process();
+        //    process.StartInfo = processStartInfo;
+        //    process.EnableRaisingEvents = true;
+        //    process.Exited += new EventHandler(run_doNothingOnExit);
+        //    process.OutputDataReceived += new DataReceivedEventHandler(OutputHandler);
+        //    process.ErrorDataReceived += new DataReceivedEventHandler(ErrorHandler);
+        //    bool processStarted = process.Start();
+        //    process.BeginOutputReadLine();
+        //    process.BeginErrorReadLine();
 
-            textBox1.AppendText("\r\n" + ("COVER DONE!") + "\r\n");
-        }
+        //    textBox1.AppendText("\r\n" + ("COVER DONE!") + "\r\n");
+        //}
 
-        private void run_ffmpegMetadata(String filename)
-        {
-            //METADATA
-            String args = "-y -i " + (char)34 + filename + (char)34 + " -f ffmetadata " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + ".txt" + (char)34;
+        //private void run_ffmpegMetadata(String filename)
+        //{
+        //    //METADATA
+        //    String args = "-y -i " + (char)34 + filename + (char)34 + " -f ffmetadata " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + ".txt" + (char)34;
 
-            ProcessStartInfo processStartInfo = new ProcessStartInfo(storage + @"\ffmpeg.exe", args);
-            processStartInfo.WorkingDirectory = storage;
+        //    ProcessStartInfo processStartInfo = new ProcessStartInfo(storage + @"\ffmpeg.exe", args);
+        //    processStartInfo.WorkingDirectory = storage;
 
-            processStartInfo.UseShellExecute = false;
-            processStartInfo.ErrorDialog = false;
-            processStartInfo.RedirectStandardOutput = true;
-            processStartInfo.RedirectStandardError = true;
-            processStartInfo.CreateNoWindow = true;
-            Process process = new Process();
-            process.StartInfo = processStartInfo;
-            process.EnableRaisingEvents = true;
-            process.Exited += new EventHandler(run_doNothingOnExit);
-            process.OutputDataReceived += new DataReceivedEventHandler(OutputHandler);
-            process.ErrorDataReceived += new DataReceivedEventHandler(ErrorHandler);
-            bool processStarted = process.Start();
-            process.BeginOutputReadLine();
-            process.BeginErrorReadLine();
+        //    processStartInfo.UseShellExecute = false;
+        //    processStartInfo.ErrorDialog = false;
+        //    processStartInfo.RedirectStandardOutput = true;
+        //    processStartInfo.RedirectStandardError = true;
+        //    processStartInfo.CreateNoWindow = true;
+        //    Process process = new Process();
+        //    process.StartInfo = processStartInfo;
+        //    process.EnableRaisingEvents = true;
+        //    process.Exited += new EventHandler(run_doNothingOnExit);
+        //    process.OutputDataReceived += new DataReceivedEventHandler(OutputHandler);
+        //    process.ErrorDataReceived += new DataReceivedEventHandler(ErrorHandler);
+        //    bool processStarted = process.Start();
+        //    process.BeginOutputReadLine();
+        //    process.BeginErrorReadLine();
 
-            textBox1.AppendText("\r\n" + ("METADATA DONE!") + "\r\n");
-        }
+        //    textBox1.AppendText("\r\n" + ("METADATA DONE!") + "\r\n");
+        //}
 
         private void run_ffmpegAudio(String filename)
         {
@@ -1063,8 +1071,6 @@ namespace SpleeterGui
             String args = "-y -i " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - mix.wav" + (char)34
                 + " -filter:a \"volume=0\" " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - drums." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34;
 
-            // .\ffmpeg.exe -i "D:\audio_output\Camila Cabello - Should've Said It\Camila Cabello - Should've Said It - mix.m4a" -filter:a "volume=0" "D:\audio_output\output.m4a"
-
             ProcessStartInfo processStartInfo = new ProcessStartInfo(storage + @"\ffmpeg.exe", args);
             processStartInfo.WorkingDirectory = storage;
 
@@ -1090,8 +1096,6 @@ namespace SpleeterGui
         {
             String args = "-y -i " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - mix.wav" + (char)34
                 + " -filter:a \"volume=0\" " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - bass." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34;
-
-            // .\ffmpeg.exe -i "D:\audio_output\Camila Cabello - Should've Said It\Camila Cabello - Should've Said It - mix.m4a" -filter:a "volume=0" "D:\audio_output\output.m4a"
 
             ProcessStartInfo processStartInfo = new ProcessStartInfo(storage + @"\ffmpeg.exe", args);
             processStartInfo.WorkingDirectory = storage;

@@ -1,0 +1,40 @@
+{
+    "mastering_dsp": {
+        "compressor": {
+            "ratio": 3,
+            "output_gain": 0.5,
+            "enabled": false,
+            "release": 0.300000011920929,
+            "attack": 0.003000000026077032,
+            "input_gain": 0.5,
+            "threshold": 0,
+            "hp_cutoff": 300,
+            "dry_wet": 50
+        },
+        "limiter": {
+            "release": 0.05000000074505806,
+            "threshold": 0,
+            "ceiling": -0.3499999940395355,
+            "enabled": false
+        }
+    },
+    "version": 1,
+    "stems": [
+        {
+            "color": "#56B4E9",
+            "name": "vocals"
+        },
+        {
+            "color": "#229e00",
+            "name": "drums"
+        },
+        {
+            "color": "#D55E00",
+            "name": "bass"
+        },
+        {
+            "color": "#CC79A7",
+            "name": "other"
+        }
+    ]
+}
