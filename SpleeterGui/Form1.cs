@@ -65,6 +65,7 @@ namespace SpleeterGui
             //program startup - initialise things
             txt_output_directory.Text = Properties.Settings.Default.output_location;
             cmbBox_codec.SelectedIndex = Properties.Settings.Default.codec;
+            chkSongName.Checked = Properties.Settings.Default.songName;
 
             if (Properties.Settings.Default.path_python == "")
             {
@@ -991,6 +992,9 @@ namespace SpleeterGui
 
         private void chkSongName_CheckedChanged(object sender, EventArgs e)
         {
+            Properties.Settings.Default.songName = chkSongName.Checked;
+            Properties.Settings.Default.Save();
+
             //EMPTY!!!!
             //update_checks();
         }

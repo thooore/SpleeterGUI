@@ -82,5 +82,17 @@ namespace SpleeterGui.Properties {
                 this["codec"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool songName {
+            get {
+                return ((bool)(this["songName"]));
+            }
+            set {
+                this["songName"] = value;
+            }
+        }
     }
 }
