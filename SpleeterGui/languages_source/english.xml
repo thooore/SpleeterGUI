@@ -45,7 +45,7 @@
 
 
 	<!-- program texts -->
-    <lang english="Showing spleeter version" control="LoadStuff_textBox1">Help: https://makenweb.com/spleeter_help.php[NL]Issues: https://github.com/thooore/SpleeterGui/issues[NL][NL]Showing spleeter version</lang>
+    <lang english="Showing spleeter version" control="LoadStuff_textBox1">Help: https://github.com/thooore/SpleeterGUI/wiki[NL]Issues: https://github.com/thooore/SpleeterGui/issues[NL][NL]Showing spleeter version</lang>
     <lang english="Please select an output directory" control="Form1_DragDrop_msgbox">Please select an output directory</lang>
     <lang english="Starting" control="starting">Starting</lang>
     <lang english="Starting processing of all songs" control="starting_all">Starting processing of all songs</lang>
