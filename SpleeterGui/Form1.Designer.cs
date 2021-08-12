@@ -468,6 +468,8 @@ namespace SpleeterGui
             // chkStemRemoveFiles
             // 
             this.chkStemRemoveFiles.AutoSize = true;
+            this.chkStemRemoveFiles.Checked = true;
+            this.chkStemRemoveFiles.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkStemRemoveFiles.Location = new System.Drawing.Point(128, 3);
             this.chkStemRemoveFiles.Name = "chkStemRemoveFiles";
             this.chkStemRemoveFiles.Size = new System.Drawing.Size(133, 17);
