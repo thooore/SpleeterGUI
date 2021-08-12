@@ -1,33 +1,33 @@
 ## SpleeterGUI - Music source separation desktop app  
 Windows Desktop Front end for [Spleeter](https://github.com/deezer/spleeter) - AI source separation 
 
-***THIS IS AN UPDATED VERSION OF SPLEETERGUI WITH NO INSTALLER***
+***THIS IS AN UPDATED VERSION OF [SPLEETERGUI](https://github.com/boy1dr/SpleeterGui/) WITH NO INSTALLER***
 
 ## Installation
 1. Download the compiled binary folder from GitHub releases and place it wherever you want.
-2. Download and install [SpleeterCore](https://github.com/thooore/SpleeterCore)
-3. Start SpleeterGUI
-4. In SpleeterGUI select ***Advanced > Set SpleeterGUI path*** and select the path to where you unzipped SpleeterCore (The `root_folder.txt` of SpleeterCore should be in that folder)
+2. Download and extract [SpleeterCore](https://github.com/thooore/SpleeterCore)
+3. Start SpleeterGUI (There could be an error message showing here, continue anyway!)
+4. In SpleeterGUI select ***Advanced > Set SpleeterGUI Core path*** and select the path to where you unzipped SpleeterCore (The `root_folder.txt` of SpleeterCore should be in that folder)
 5. Restart SpleeterGUI
 
 
-This repository is a fork of the original [SpleeterGUI](https://github.com/boy1dr/SpleeterGui/) which can be downloaded from [here](https://makenweb.com/SpleeterGUI) and has a [FAQ](https://makenweb.com/spleeter_help) that is still relevant
+This repository is a fork of the original [SpleeterGUI](https://github.com/boy1dr/SpleeterGui/)  which can be downloaded from [here](https://makenweb.com/SpleeterGUI).
+
+The original project was developed by by [Maken It So](https://makenweb.com).
    
 ---
 This new version (3.0) has some additional features:
-- Generate [NI Stems](https://www.native-instruments.com/en/specials/stems/) for use in programs such as Traktor
+- Generate [NI Stems](https://www.native-instruments.com/en/specials/stems/) for use in programs such as [Traktor](https://www.native-instruments.com/en/catalog/traktor/dj-software/)
 - Different output formats
 - Auto-name output files
 
 ---
 
-No need to install python or spleeter, this app contains a portable version of python pre-loaded with Spleeter.  
-
-The aim for this project is to make it easy for Windows users to download and run Spleeter without needing to use the command line tools to do so.  
+This project is a C# desktop front end for Spleeter that adds the ability to create [NI Stems](https://www.native-instruments.com/en/specials/stems/).  
 
 ![SpleeterGUI_app](./docs/Spleeter_GUI.png)  
 
-This project is a simple C# desktop front end for Spleeter.  
+
 
 ## Examples
 https://www.youtube.com/watch?v=bdNzVPLzOLE  
@@ -38,10 +38,15 @@ https://www.youtube.com/watch?v=9KkWJHC2bz0
 https://www.youtube.com/watch?v=Mygm1sFlQXc  
 
 This project contains the C# source code for the Graphical User Interface. The GUI is an Windows Forms Application requiring Microsoft Visual Studio to build.
-The [SpleeterGUI Core](https://github.com/thooore/SpleeterCore) required to run this program contains Python3.7 and the Spleeter project.
 
-Feel free to inspect the source code and build for yourself. You can also install your own python/tensorflow/ffmpeg/spleeter.
+The [SpleeterGUI Core](https://github.com/thooore/SpleeterCore) required to run this program contains Python 3.7 and [Spleeter](https://github.com/deezer/spleeter). It contains everything you need to get up and running.
 
-There can be some bugs with the recombine feature in combination with the auto-naming and codec options. If you encounter a bug, you can leave an issue explaining what happened or a pull request if you want to fix it yourself.
+Feel free to inspect the source code and build for yourself.
 
-Also huge thanks to the original creator for making such a useful program!
+## Help, FAQ and more
+Check out the [Wiki](https://github.com/thooore/SpleeterGUI/wiki) for more information.
+If you encounter a problem feel free to [create an issue](https://github.com/thooore/SpleeterGUI/issues/new)!
+
+***
+
+Also huge thanks to the original creator [Maken It So](https://makenweb.com/) for creating such a useful program!

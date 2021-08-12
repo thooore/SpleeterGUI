@@ -18,9 +18,10 @@ using System.Windows.Forms;
 using System.Xml;
 
 /* TODO:
- * Make the panels a groupbox and disable all of them when running, so the user can't screw things up
+ * Make the panels a groupbox and disable all of them when running, so the user can't screw things up (right now the user can uncheck things)
+ * /\ - Changing checkbox states while the program is running crashes things, but the user has to be pretty stupid to try this
  * Refactor the Stem-building and ffmpeg stuff
- * Allow the stem-builder to remove all files created by it
+ * 
  * 
  * */
 
@@ -63,7 +64,7 @@ namespace SpleeterGui
         {
             //program startup - initialise things
             txt_output_directory.Text = Properties.Settings.Default.output_location;
-            cmbBox_codec.SelectedIndex = 1; //Default codec mp3
+            cmbBox_codec.SelectedIndex = Properties.Settings.Default.codec;
 
             if (Properties.Settings.Default.path_python == "")
             {
@@ -281,7 +282,8 @@ namespace SpleeterGui
                 }
                 catch
                 {
-                    MessageBox.Show("Error: unable to find python.exe");
+                    //"Error: unable to find python.exe"
+                    MessageBox.Show(langStr["python_not_found"] + "\n" + langStr["python_path_error_tip"]);
                 }
             }
             else
@@ -323,7 +325,7 @@ namespace SpleeterGui
             }
             catch
             {
-                MessageBox.Show("Unable to find python.exe");
+                MessageBox.Show(langStr["python_not_found"] + "\n" + langStr["python_path_error_tip"]);
             }
         }
         private void run_recombine(String args)
@@ -430,7 +432,7 @@ namespace SpleeterGui
                     // System.Media.SystemSounds.Beep.Play();
                 }
 
-                if (chkStemRemoveFiles.Checked = true)
+                if (chkStemRemoveFiles.Checked == true)
                 {
                     RemoveStemFiles();
                 }
@@ -649,7 +651,7 @@ namespace SpleeterGui
         private void helpFAQToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //help - opens the SpleeterGUI help page in a browser window
-            System.Diagnostics.Process.Start("https://makenweb.com/spleeter_help.php");
+            System.Diagnostics.Process.Start("https://github.com/thooore/SpleeterGUI/wiki");
         }
 
         private void parts_btn2_Click(object sender, EventArgs e)
@@ -759,7 +761,7 @@ namespace SpleeterGui
                             version_check = html.Substring(posStart, posEnd - posStart);
                             if (version_check != "" && version_check != gui_version)
                             {
-                                MessageBox.Show(langStr["version"] + " " + version_check + " " + langStr["is_available"] + "\n" + "Current version: " + gui_version);
+                                MessageBox.Show(langStr["version"] + " " + version_check + " " + langStr["is_available"] + "\n" + langStr["current_version"] + " " + gui_version);
                             }
                             else
                             {
@@ -770,10 +772,10 @@ namespace SpleeterGui
                 }
                 else
                 {
-                    MessageBox.Show(langStr["unable"]);
+                    MessageBox.Show(langStr["unable"] + "\n" + langStr["current_version"] + " " + gui_version);
                 }
             } catch {
-                MessageBox.Show(langStr["unable"]);
+                MessageBox.Show(langStr["unable"] + "\n" + langStr["current_version"] + " " + gui_version);
             }
         }
 
@@ -799,7 +801,7 @@ namespace SpleeterGui
                 pnlRecombine.Height = 20;
                 pnlMain.Location = new Point(12, 182);
                 this.Height = 737;
-                // Project height default in Designer: 667
+                // Project height default in Designer: 667 (before)
                 // this.Height = 677;
             }
             else
@@ -811,14 +813,14 @@ namespace SpleeterGui
                     pnlRecombine.Height = 50;
                     pnlMain.Location = new Point(12, 202);
                     this.Height = 757;
-                    // this.Height = 697;
+                    // this.Height = 697; (before)
                 }
                 else
                 {
                     pnlRecombine.Height = 20;
                     pnlMain.Location = new Point(12, 182);
                     this.Height = 737;
-                    // this.Height = 677;
+                    // this.Height = 677; (before)
 
                     chkRPartVocal.Checked = false;
                     chkRPartBass.Checked = false;
@@ -1133,6 +1135,10 @@ namespace SpleeterGui
             textBox1.AppendText("\r\n" + ("RENAME ACCOMPANIMENT DONE!") + "\r\n");
         }
 
-
+        private void cmbBox_codec_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.codec = cmbBox_codec.SelectedIndex;
+            Properties.Settings.Default.Save();
+        }
     }
 }

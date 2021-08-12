@@ -5,9 +5,9 @@
     <menu english="File" control="fileToolStripMenuItem">File</menu>
     <menu english="Exit" control="exitToolStripMenuItem">Exit</menu>
     <menu english="Help" control="helpToolStripMenuItem">Help</menu>
-    <menu english="Help &amp;and FAQ" control="helpFAQToolStripMenuItem">Help &amp;and FAQ</menu>
-    <menu english="Check SpleeterGUI updates" control="checkSpleeterGUIUpdateToolStripMenuItem">Check SpleeterGUI updates</menu>
-    <menu english="Update Spleeter library" control="spleeterupgradeToolStripMenuItem">Update Spleeter library</menu>
+    <menu english="Help and FAQ" control="helpFAQToolStripMenuItem">Help and FAQ</menu>
+    <menu english="Check for SpleeterGUI updates" control="checkSpleeterGUIUpdateToolStripMenuItem">Check for SpleeterGUI updates</menu>
+    <menu english="Update Spleeter version" control="spleeterupgradeToolStripMenuItem">Update Spleeter version</menu>
     <menu english="SpleeterGUI GitHub page" control="spleeterGithubPageToolStripMenuItem">SpleeterGUI GitHub page</menu>
     <menu english="Maken It So GitHub" control="makenItSoToolStripMenuItem1">Maken It So GitHub</menu>
     <menu english="Advanced" control="advancedToolStripMenuItem">Advanced</menu>
@@ -29,7 +29,7 @@
     <item english="Drums" control="chkRPartDrums">Drums</item>
     <item english="Piano" control="chkRPartPiano">Piano</item>
     <item english="Other" control="chkRPartOther">Other</item>
-    <item english="Full bandwidth (16Khz High quality)" control="chkFullBandwidth">Full bandwidth (16Khz High quality)</item>
+    <item english="Full bandwidth (16kHz High quality)" control="chkFullBandwidth">Full bandwidth (16kHz High quality)</item>
     <item english="Save to" control="btnSaveTo">Save to</item>
     <item english="Drop your music file(s) here to begin processing" control="lblDroptext">Drop your music file(s) here to begin processing</item>
     <item english="Or select music file(s)" control="btnSelectFiles">Or select music file(s)</item>
@@ -66,6 +66,9 @@
     <lang english="You are using the latest version" control="latest">You are using the latest version</lang>
     <lang english="Unable get new version data, check internet connection" control="unable">Unable get new version data, check internet connection</lang>
     <lang english="Choose output location" control="set_output">Choose output location</lang>
-    <lang english="Choose location of Spleeter Core" control="set_python_path">Choose location of Spleeter Core</lang>
-	<lang english="You are running the latest version" control="latest">You are running the latest version</lang>
+    <lang english="Select location of SpleeterCore" control="set_python_path">Select location of SpleeterCore</lang>
+	  <lang english="You are running the latest version" control="latest">You are running the latest version</lang>
+    <lang english="Current version:" control="current_version">Current version:</lang>
+    <lang english="Error: Unable to find python.exe" control="python_not_found">Error: Unable to find python.exe</lang>
+    <lang english="Use 'Advanced' > 'Select SpleeterGUI Core path' to select SpleeterCore path" control="python_path_error_tip">Use 'Advanced' > 'Select SpleeterGUI Core path' to select SpleeterCore path</lang>
 </root>

@@ -38,6 +38,7 @@ namespace SpleeterGui
             this.mnuLanguage = new System.Windows.Forms.ToolStripMenuItem();
             this.advancedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setPythonPathToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.spleeterupgradeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpFAQToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkSpleeterGUIUpdateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -82,7 +83,6 @@ namespace SpleeterGui
             this.chkRPartBass = new System.Windows.Forms.CheckBox();
             this.chkRPartVocal = new System.Windows.Forms.CheckBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.spleeterupgradeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.pnlMain.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -138,7 +138,7 @@ namespace SpleeterGui
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -155,14 +155,21 @@ namespace SpleeterGui
             this.spleeterupgradeToolStripMenuItem});
             this.advancedToolStripMenuItem.Name = "advancedToolStripMenuItem";
             this.advancedToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
-            this.advancedToolStripMenuItem.Text = "Advanced";
+            this.advancedToolStripMenuItem.Text = "&Advanced";
             // 
             // setPythonPathToolStripMenuItem1
             // 
             this.setPythonPathToolStripMenuItem1.Name = "setPythonPathToolStripMenuItem1";
-            this.setPythonPathToolStripMenuItem1.Size = new System.Drawing.Size(189, 22);
-            this.setPythonPathToolStripMenuItem1.Text = "Set SpleeterGUI path";
+            this.setPythonPathToolStripMenuItem1.Size = new System.Drawing.Size(209, 22);
+            this.setPythonPathToolStripMenuItem1.Text = "&Set SpleeterGUI Core path";
             this.setPythonPathToolStripMenuItem1.Click += new System.EventHandler(this.setPythonPathToolStripMenuItem1_Click);
+            // 
+            // spleeterupgradeToolStripMenuItem
+            // 
+            this.spleeterupgradeToolStripMenuItem.Name = "spleeterupgradeToolStripMenuItem";
+            this.spleeterupgradeToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            this.spleeterupgradeToolStripMenuItem.Text = "&Update Spleeter version";
+            this.spleeterupgradeToolStripMenuItem.Click += new System.EventHandler(this.spleeterupgradeToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -186,8 +193,8 @@ namespace SpleeterGui
             // checkSpleeterGUIUpdateToolStripMenuItem
             // 
             this.checkSpleeterGUIUpdateToolStripMenuItem.Name = "checkSpleeterGUIUpdateToolStripMenuItem";
-            this.checkSpleeterGUIUpdateToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
-            this.checkSpleeterGUIUpdateToolStripMenuItem.Text = "Check &SpleeterGUI updates";
+            this.checkSpleeterGUIUpdateToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.checkSpleeterGUIUpdateToolStripMenuItem.Text = "Check for SpleeterGUI &updates";
             this.checkSpleeterGUIUpdateToolStripMenuItem.Click += new System.EventHandler(this.checkSpleeterGUIUpdateToolStripMenuItem_Click);
             // 
             // toolStripMenuItem3
@@ -198,15 +205,15 @@ namespace SpleeterGui
             // spleeterGithubPageToolStripMenuItem
             // 
             this.spleeterGithubPageToolStripMenuItem.Name = "spleeterGithubPageToolStripMenuItem";
-            this.spleeterGithubPageToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
-            this.spleeterGithubPageToolStripMenuItem.Text = "SpleeterGUI &Github page";
+            this.spleeterGithubPageToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.spleeterGithubPageToolStripMenuItem.Text = "SpleeterGUI &GitHub page";
             this.spleeterGithubPageToolStripMenuItem.Click += new System.EventHandler(this.spleeterGithubPageToolStripMenuItem_Click);
             // 
             // makenItSoToolStripMenuItem1
             // 
             this.makenItSoToolStripMenuItem1.Name = "makenItSoToolStripMenuItem1";
-            this.makenItSoToolStripMenuItem1.Size = new System.Drawing.Size(216, 22);
-            this.makenItSoToolStripMenuItem1.Text = "&Maken It So Github";
+            this.makenItSoToolStripMenuItem1.Size = new System.Drawing.Size(234, 22);
+            this.makenItSoToolStripMenuItem1.Text = "&Maken It So GitHub";
             this.makenItSoToolStripMenuItem1.Click += new System.EventHandler(this.makenItSoToolStripMenuItem1_Click);
             // 
             // btnSaveTo
@@ -247,9 +254,9 @@ namespace SpleeterGui
             this.chkFullBandwidth.ForeColor = System.Drawing.Color.Black;
             this.chkFullBandwidth.Location = new System.Drawing.Point(15, 12);
             this.chkFullBandwidth.Name = "chkFullBandwidth";
-            this.chkFullBandwidth.Size = new System.Drawing.Size(191, 17);
+            this.chkFullBandwidth.Size = new System.Drawing.Size(192, 17);
             this.chkFullBandwidth.TabIndex = 7;
-            this.chkFullBandwidth.Text = "Full bandwidth (16Khz High quality)";
+            this.chkFullBandwidth.Text = "Full bandwidth (16kHz High quality)";
             this.chkFullBandwidth.UseVisualStyleBackColor = true;
             this.chkFullBandwidth.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
@@ -548,6 +555,7 @@ namespace SpleeterGui
             this.cmbBox_codec.Name = "cmbBox_codec";
             this.cmbBox_codec.Size = new System.Drawing.Size(79, 21);
             this.cmbBox_codec.TabIndex = 20;
+            this.cmbBox_codec.SelectedIndexChanged += new System.EventHandler(this.cmbBox_codec_SelectedIndexChanged);
             // 
             // duration
             // 
@@ -677,13 +685,6 @@ namespace SpleeterGui
             this.pictureBox1.Size = new System.Drawing.Size(279, 71);
             this.pictureBox1.TabIndex = 22;
             this.pictureBox1.TabStop = false;
-            // 
-            // spleeterupgradeToolStripMenuItem
-            // 
-            this.spleeterupgradeToolStripMenuItem.Name = "spleeterupgradeToolStripMenuItem";
-            this.spleeterupgradeToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-            this.spleeterupgradeToolStripMenuItem.Text = "Spleeter core &upgrade";
-            this.spleeterupgradeToolStripMenuItem.Click += new System.EventHandler(this.spleeterupgradeToolStripMenuItem_Click);
             // 
             // Form1
             // 
