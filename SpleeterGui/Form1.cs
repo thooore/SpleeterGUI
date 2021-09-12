@@ -602,7 +602,7 @@ namespace SpleeterGui
             }
             else
             {
-                textBox1.AppendText("\r\n" + "Folder: \"" + txt_output_directory.Text + @"\" + current_songname + "\" is not empty! Skipping!" + "\r\n");
+                textBox1.AppendText("\r\n" + "Folder: \"" + txt_output_directory.Text + @"\" + current_songname + "\" is not empty! Not removing folder!" + "\r\n");
             }
 
         }
@@ -636,16 +636,31 @@ namespace SpleeterGui
             }
             else
             {
-                if (chkRPartVocal.Checked) { input_count++; recomnbine_command += " -i " + (char)34 +
-                        txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + @" - vocals." + codec + (char)34; }
-                if (chkRPartBass.Checked) { input_count++; recomnbine_command += " -i " + (char)34 +
-                        txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + @" - bass." + codec + (char)34; }
-                if (chkRPartDrums.Checked) { input_count++; recomnbine_command += " -i " + (char)34 +
-                        txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + @" - drums." + codec + (char)34; }
-                if (chkRPartPiano.Checked) { input_count++; recomnbine_command += " -i " + (char)34 +
-                        txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + @" - piano." + codec + (char)34; }
-                if (chkRPartOther.Checked) { input_count++; recomnbine_command += " -i " + (char)34 +
-                        txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + @" - other." + codec + (char)34; }
+                if (chkRPartVocal.Checked)
+                {
+                    input_count++; recomnbine_command += " -i " + (char)34 +
+txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + @" - vocals." + codec + (char)34;
+                }
+                if (chkRPartBass.Checked)
+                {
+                    input_count++; recomnbine_command += " -i " + (char)34 +
+txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + @" - bass." + codec + (char)34;
+                }
+                if (chkRPartDrums.Checked)
+                {
+                    input_count++; recomnbine_command += " -i " + (char)34 +
+txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + @" - drums." + codec + (char)34;
+                }
+                if (chkRPartPiano.Checked)
+                {
+                    input_count++; recomnbine_command += " -i " + (char)34 +
+txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + @" - piano." + codec + (char)34;
+                }
+                if (chkRPartOther.Checked)
+                {
+                    input_count++; recomnbine_command += " -i " + (char)34 +
+txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + @" - other." + codec + (char)34;
+                }
                 if (recomnbine_command != "")
                 {
                     String filter_a = "";
@@ -936,7 +951,7 @@ namespace SpleeterGui
                 chkRecombine.Enabled = false;
                 pnlRecombine.Height = 20;
                 pnlMain.Location = new Point(12, 182);
-                this.Height = 737;
+                this.Height = 732;
                 // Project height default in Designer: 667 (before)
                 // this.Height = 677;
             }
@@ -948,14 +963,14 @@ namespace SpleeterGui
                 {
                     pnlRecombine.Height = 50;
                     pnlMain.Location = new Point(12, 202);
-                    this.Height = 757;
+                    this.Height = 752;
                     // this.Height = 697; (before)
                 }
                 else
                 {
                     pnlRecombine.Height = 20;
                     pnlMain.Location = new Point(12, 182);
-                    this.Height = 737;
+                    this.Height = 732;
                     // this.Height = 677; (before)
 
                     chkRPartVocal.Checked = false;
@@ -1082,14 +1097,27 @@ namespace SpleeterGui
 
             if (File.Exists(storage + @"\ni-stem\ni-stem.exe"))
             {
+                String outputArgument;
+
+                if (!chkStemsFolder.Checked)
+                {
+                    outputArgument = (char)34 + txt_output_directory.Text + @"\" + current_songname + ".stem." +
+                    cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34;
+                }
+                else
+                {
+                    outputArgument = (char)34 + txt_output_directory.Text + @"\" + "stems" + @"\" + current_songname + ".stem." +
+                    cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34;
+                }
+
+
 
                 String args = "create -x " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - mix.wav" + (char)34 + " -s " +
                     (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - vocals." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34 + " " +
                     (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - drums." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34 + " " +
                     (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - bass." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34 + " " +
                     (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + " - other." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34 + " " +
-                    "-m " + (char)34 + storage + @"\ni-stem\ni-stem-metadata.json" + (char)34 + " -o " + (char)34 + txt_output_directory.Text + @"\" + current_songname + ".stem." +
-                    cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34;
+                    "-m " + (char)34 + storage + @"\ni-stem\ni-stem-metadata.json" + (char)34 + " -o " + outputArgument;
 
 
 
