@@ -85,7 +85,7 @@ namespace SpleeterGui
 
 
 
-
+            bitrate.Value = Properties.Settings.Default.bitrate;
             duration.Value = Properties.Settings.Default.duration;
 
             update_checks();
@@ -358,19 +358,19 @@ namespace SpleeterGui
                 if (chkNIStem.Checked == true)
                 {
                     processStartInfo = new ProcessStartInfo(pyPath, @" -W ignore -m spleeter separate  -o " + (char)34 + txt_output_directory.Text + (char)34 + " -d " +
-                        (duration.Value).ToString() + " -p " + (char)34 + storage + @"\config.json" + (char)34 + " -c " + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) +
+                        (duration.Value).ToString() + " -b " + (bitrate.Value).ToString() + "k -p " + (char)34 + storage + @"\config.json" + (char)34 + " -c " + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) +
                         " -f " + (char)34 + "{filename}\\{filename} - {instrument}.{codec}" + (char)34 + " " + (char)34 + filename + (char)34);
                 }
                 else if (chkSongName.Checked == true)
                 {
                     processStartInfo = new ProcessStartInfo(pyPath, @" -W ignore -m spleeter separate  -o " + (char)34 + txt_output_directory.Text + (char)34 + " -d " +
-                        (duration.Value).ToString() + " -p " + (char)34 + storage + @"\config.json" + (char)34 + " -c " + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) +
+                        (duration.Value).ToString() + " -b " + (bitrate.Value).ToString() + "k -p " + (char)34 + storage + @"\config.json" + (char)34 + " -c " + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) +
                         " -f " + (char)34 + "{filename}\\{filename} - {instrument}.{codec}" + (char)34 + " " + (char)34 + filename + (char)34);
                 }
                 else
                 {
                     processStartInfo = new ProcessStartInfo(pyPath, @" -W ignore -m spleeter separate  -o " + (char)34 + txt_output_directory.Text + (char)34 + " -d " +
-                        (duration.Value).ToString() + " -p " + (char)34 + storage + @"\config.json" + (char)34 + " -c " + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) +
+                        (duration.Value).ToString() + " -b " + (bitrate.Value).ToString() + "k -p " + (char)34 + storage + @"\config.json" + (char)34 + " -c " + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) +
                         " " + (char)34 + filename + (char)34);
                 }
                 processStartInfo.WorkingDirectory = storage;
@@ -629,7 +629,7 @@ namespace SpleeterGui
                         filter_b += "[" + ((char)97 + i) + "]";
                     }
                     recomnbine_command = recomnbine_command + " -filter_complex " + (char)34 + filter_a + filter_b + "amix=inputs=" + input_count.ToString() +
-                        ":duration =longest" + (char)34 + " " + (char)34 + txt_output_directory.Text + @"\" + current_songname + "_recombined."
+                        ":duration =longest" + (char)34 + " -ab " + (bitrate.Value).ToString() + "k " + (char)34 + txt_output_directory.Text + @"\" + current_songname + "_recombined."
                         + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34;
                     run_recombine(recomnbine_command);
                 }
@@ -671,7 +671,7 @@ txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + 
                         filter_b += "[" + ((char)97 + i) + "]";
                     }
                     recomnbine_command = recomnbine_command + " -filter_complex " + (char)34 + filter_a + filter_b + "amix=inputs=" + input_count.ToString() + ":duration =longest"
-                        + (char)34 + " " + (char)34 + txt_output_directory.Text + @"\" + current_songname + "_recombined." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34;
+                        + (char)34 + " -ab " + (bitrate.Value).ToString() + "k " + (char)34 + txt_output_directory.Text + @"\" + current_songname + "_recombined." + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34;
                     run_recombine(recomnbine_command);
                 }
             }
@@ -951,7 +951,7 @@ txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + 
                 chkRecombine.Enabled = false;
                 pnlRecombine.Height = 20;
                 pnlMain.Location = new Point(12, 182);
-                this.Height = 732;
+                this.Height = 752;
                 // Project height default in Designer: 667 (before)
                 // this.Height = 677;
             }
@@ -963,14 +963,14 @@ txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + 
                 {
                     pnlRecombine.Height = 50;
                     pnlMain.Location = new Point(12, 202);
-                    this.Height = 752;
+                    this.Height = 772;
                     // this.Height = 697; (before)
                 }
                 else
                 {
                     pnlRecombine.Height = 20;
                     pnlMain.Location = new Point(12, 182);
-                    this.Height = 732;
+                    this.Height = 752;
                     // this.Height = 677; (before)
 
                     chkRPartVocal.Checked = false;
@@ -1299,7 +1299,21 @@ txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + 
 
         private void cmbBox_codec_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cmbBox_codec.SelectedIndex == 0 || cmbBox_codec.SelectedIndex == 5)
+            {
+                bitrate.Enabled = false;
+            }
+            else
+            {
+                bitrate.Enabled = true;
+            }
             Properties.Settings.Default.codec = cmbBox_codec.SelectedIndex;
+            Properties.Settings.Default.Save();
+        }
+
+        private void bitrate_ValueChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.bitrate = Convert.ToInt32(bitrate.Value);
             Properties.Settings.Default.Save();
         }
     }

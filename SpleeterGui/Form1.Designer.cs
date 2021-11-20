@@ -64,7 +64,10 @@ namespace SpleeterGui
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.pnlMain = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.divider = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.chkStemsFolder = new System.Windows.Forms.CheckBox();
             this.chkStemRemoveFiles = new System.Windows.Forms.CheckBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.chkNIStemTwoStems = new System.Windows.Forms.CheckBox();
@@ -83,15 +86,20 @@ namespace SpleeterGui
             this.chkRPartBass = new System.Windows.Forms.CheckBox();
             this.chkRPartVocal = new System.Windows.Forms.CheckBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.chkStemsFolder = new System.Windows.Forms.CheckBox();
-            this.divider = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.lblBitrate = new System.Windows.Forms.Label();
+            this.lblKbps = new System.Windows.Forms.Label();
+            this.bitrate = new System.Windows.Forms.NumericUpDown();
             this.menuStrip1.SuspendLayout();
             this.pnlMain.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.duration)).BeginInit();
             this.pnlRecombine.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bitrate)).BeginInit();
             this.SuspendLayout();
             // 
             // stems2
@@ -225,7 +233,7 @@ namespace SpleeterGui
             this.btnSaveTo.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnSaveTo.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             this.btnSaveTo.ForeColor = System.Drawing.Color.Black;
-            this.btnSaveTo.Location = new System.Drawing.Point(15, 67);
+            this.btnSaveTo.Location = new System.Drawing.Point(15, 7);
             this.btnSaveTo.Name = "btnSaveTo";
             this.btnSaveTo.Size = new System.Drawing.Size(97, 22);
             this.btnSaveTo.TabIndex = 8;
@@ -240,7 +248,7 @@ namespace SpleeterGui
             this.txt_output_directory.AccessibleRole = System.Windows.Forms.AccessibleRole.StaticText;
             this.txt_output_directory.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             this.txt_output_directory.ForeColor = System.Drawing.Color.Black;
-            this.txt_output_directory.Location = new System.Drawing.Point(118, 67);
+            this.txt_output_directory.Location = new System.Drawing.Point(118, 7);
             this.txt_output_directory.Name = "txt_output_directory";
             this.txt_output_directory.Size = new System.Drawing.Size(364, 22);
             this.txt_output_directory.TabIndex = 9;
@@ -254,7 +262,7 @@ namespace SpleeterGui
             this.chkFullBandwidth.Checked = true;
             this.chkFullBandwidth.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkFullBandwidth.ForeColor = System.Drawing.Color.Black;
-            this.chkFullBandwidth.Location = new System.Drawing.Point(15, 12);
+            this.chkFullBandwidth.Location = new System.Drawing.Point(14, 11);
             this.chkFullBandwidth.Name = "chkFullBandwidth";
             this.chkFullBandwidth.Size = new System.Drawing.Size(192, 17);
             this.chkFullBandwidth.TabIndex = 7;
@@ -271,7 +279,7 @@ namespace SpleeterGui
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(102)))), ((int)(((byte)(204)))));
-            this.textBox1.Location = new System.Drawing.Point(4, 208);
+            this.textBox1.Location = new System.Drawing.Point(4, 139);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -283,7 +291,7 @@ namespace SpleeterGui
             this.lblDroptext.AutoSize = true;
             this.lblDroptext.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDroptext.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblDroptext.Location = new System.Drawing.Point(43, 103);
+            this.lblDroptext.Location = new System.Drawing.Point(43, 39);
             this.lblDroptext.Name = "lblDroptext";
             this.lblDroptext.Size = new System.Drawing.Size(412, 24);
             this.lblDroptext.TabIndex = 13;
@@ -306,7 +314,7 @@ namespace SpleeterGui
             this.progressBar1.AccessibleName = "Progress Bar";
             this.progressBar1.AccessibleRole = System.Windows.Forms.AccessibleRole.ProgressBar;
             this.progressBar1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
-            this.progressBar1.Location = new System.Drawing.Point(4, 185);
+            this.progressBar1.Location = new System.Drawing.Point(4, 116);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(491, 17);
             this.progressBar1.TabIndex = 11;
@@ -396,7 +404,7 @@ namespace SpleeterGui
             this.lblProgress.AutoSize = true;
             this.lblProgress.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblProgress.ForeColor = System.Drawing.Color.Black;
-            this.lblProgress.Location = new System.Drawing.Point(1, 165);
+            this.lblProgress.Location = new System.Drawing.Point(1, 96);
             this.lblProgress.Name = "lblProgress";
             this.lblProgress.Size = new System.Drawing.Size(61, 17);
             this.lblProgress.TabIndex = 10;
@@ -407,7 +415,7 @@ namespace SpleeterGui
             this.progress_txt.AutoSize = true;
             this.progress_txt.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.progress_txt.ForeColor = System.Drawing.Color.Black;
-            this.progress_txt.Location = new System.Drawing.Point(61, 165);
+            this.progress_txt.Location = new System.Drawing.Point(61, 96);
             this.progress_txt.Name = "progress_txt";
             this.progress_txt.Size = new System.Drawing.Size(29, 17);
             this.progress_txt.TabIndex = 12;
@@ -419,7 +427,7 @@ namespace SpleeterGui
             this.btnSelectFiles.AccessibleName = "Choose music files";
             this.btnSelectFiles.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnSelectFiles.ForeColor = System.Drawing.Color.Black;
-            this.btnSelectFiles.Location = new System.Drawing.Point(187, 137);
+            this.btnSelectFiles.Location = new System.Drawing.Point(186, 70);
             this.btnSelectFiles.Name = "btnSelectFiles";
             this.btnSelectFiles.Size = new System.Drawing.Size(124, 23);
             this.btnSelectFiles.TabIndex = 15;
@@ -435,27 +443,37 @@ namespace SpleeterGui
             // 
             // pnlMain
             // 
+            this.pnlMain.Controls.Add(this.panel2);
+            this.pnlMain.Controls.Add(this.panel3);
             this.pnlMain.Controls.Add(this.divider);
             this.pnlMain.Controls.Add(this.panel1);
-            this.pnlMain.Controls.Add(this.chkSongName);
-            this.pnlMain.Controls.Add(this.codec_label);
-            this.pnlMain.Controls.Add(this.cmbBox_codec);
-            this.pnlMain.Controls.Add(this.duration);
-            this.pnlMain.Controls.Add(this.lblSeconds);
-            this.pnlMain.Controls.Add(this.lblMaxLength);
-            this.pnlMain.Controls.Add(this.chkFullBandwidth);
-            this.pnlMain.Controls.Add(this.btnSelectFiles);
-            this.pnlMain.Controls.Add(this.btnSaveTo);
-            this.pnlMain.Controls.Add(this.textBox1);
-            this.pnlMain.Controls.Add(this.txt_output_directory);
-            this.pnlMain.Controls.Add(this.progress_txt);
-            this.pnlMain.Controls.Add(this.lblDroptext);
-            this.pnlMain.Controls.Add(this.lblProgress);
-            this.pnlMain.Controls.Add(this.progressBar1);
             this.pnlMain.Location = new System.Drawing.Point(12, 182);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(504, 504);
+            this.pnlMain.Size = new System.Drawing.Size(504, 524);
             this.pnlMain.TabIndex = 37;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.txt_output_directory);
+            this.panel3.Controls.Add(this.btnSaveTo);
+            this.panel3.Controls.Add(this.lblDroptext);
+            this.panel3.Controls.Add(this.btnSelectFiles);
+            this.panel3.Controls.Add(this.textBox1);
+            this.panel3.Controls.Add(this.progress_txt);
+            this.panel3.Controls.Add(this.lblProgress);
+            this.panel3.Controls.Add(this.progressBar1);
+            this.panel3.Location = new System.Drawing.Point(0, 89);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(504, 376);
+            this.panel3.TabIndex = 43;
+            // 
+            // divider
+            // 
+            this.divider.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.divider.Location = new System.Drawing.Point(0, 471);
+            this.divider.Name = "divider";
+            this.divider.Size = new System.Drawing.Size(504, 2);
+            this.divider.TabIndex = 42;
             // 
             // panel1
             // 
@@ -464,10 +482,22 @@ namespace SpleeterGui
             this.panel1.Controls.Add(this.pictureBox2);
             this.panel1.Controls.Add(this.chkNIStemTwoStems);
             this.panel1.Controls.Add(this.chkNIStem);
-            this.panel1.Location = new System.Drawing.Point(0, 453);
+            this.panel1.Location = new System.Drawing.Point(0, 476);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(504, 48);
             this.panel1.TabIndex = 41;
+            // 
+            // chkStemsFolder
+            // 
+            this.chkStemsFolder.AutoSize = true;
+            this.chkStemsFolder.Checked = true;
+            this.chkStemsFolder.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkStemsFolder.Location = new System.Drawing.Point(215, 26);
+            this.chkStemsFolder.Name = "chkStemsFolder";
+            this.chkStemsFolder.Size = new System.Drawing.Size(129, 17);
+            this.chkStemsFolder.TabIndex = 44;
+            this.chkStemsFolder.Text = "Save to \'stems\' Folder";
+            this.chkStemsFolder.UseVisualStyleBackColor = false;
             // 
             // chkStemRemoveFiles
             // 
@@ -526,7 +556,7 @@ namespace SpleeterGui
             this.chkSongName.AccessibleName = "Song name to output";
             this.chkSongName.AccessibleRole = System.Windows.Forms.AccessibleRole.CheckButton;
             this.chkSongName.AutoSize = true;
-            this.chkSongName.Location = new System.Drawing.Point(310, 12);
+            this.chkSongName.Location = new System.Drawing.Point(309, 11);
             this.chkSongName.Name = "chkSongName";
             this.chkSongName.Size = new System.Drawing.Size(172, 17);
             this.chkSongName.TabIndex = 39;
@@ -537,7 +567,7 @@ namespace SpleeterGui
             // codec_label
             // 
             this.codec_label.AutoSize = true;
-            this.codec_label.Location = new System.Drawing.Point(325, 39);
+            this.codec_label.Location = new System.Drawing.Point(324, 38);
             this.codec_label.Name = "codec_label";
             this.codec_label.Size = new System.Drawing.Size(72, 13);
             this.codec_label.TabIndex = 21;
@@ -557,7 +587,7 @@ namespace SpleeterGui
             "m4a",
             "wma",
             "flac"});
-            this.cmbBox_codec.Location = new System.Drawing.Point(403, 36);
+            this.cmbBox_codec.Location = new System.Drawing.Point(402, 35);
             this.cmbBox_codec.Name = "cmbBox_codec";
             this.cmbBox_codec.Size = new System.Drawing.Size(79, 21);
             this.cmbBox_codec.TabIndex = 20;
@@ -565,7 +595,7 @@ namespace SpleeterGui
             // 
             // duration
             // 
-            this.duration.Location = new System.Drawing.Point(124, 37);
+            this.duration.Location = new System.Drawing.Point(123, 36);
             this.duration.Maximum = new decimal(new int[] {
             7200,
             0,
@@ -584,7 +614,7 @@ namespace SpleeterGui
             // lblSeconds
             // 
             this.lblSeconds.AutoSize = true;
-            this.lblSeconds.Location = new System.Drawing.Point(176, 39);
+            this.lblSeconds.Location = new System.Drawing.Point(175, 38);
             this.lblSeconds.Name = "lblSeconds";
             this.lblSeconds.Size = new System.Drawing.Size(47, 13);
             this.lblSeconds.TabIndex = 18;
@@ -594,7 +624,7 @@ namespace SpleeterGui
             // 
             this.lblMaxLength.AutoSize = true;
             this.lblMaxLength.ForeColor = System.Drawing.Color.Black;
-            this.lblMaxLength.Location = new System.Drawing.Point(15, 39);
+            this.lblMaxLength.Location = new System.Drawing.Point(14, 38);
             this.lblMaxLength.Name = "lblMaxLength";
             this.lblMaxLength.Size = new System.Drawing.Size(109, 13);
             this.lblMaxLength.TabIndex = 17;
@@ -692,25 +722,59 @@ namespace SpleeterGui
             this.pictureBox1.TabIndex = 22;
             this.pictureBox1.TabStop = false;
             // 
-            // chkStemsFolder
+            // panel2
             // 
-            this.chkStemsFolder.AutoSize = true;
-            this.chkStemsFolder.Checked = true;
-            this.chkStemsFolder.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkStemsFolder.Location = new System.Drawing.Point(215, 26);
-            this.chkStemsFolder.Name = "chkStemsFolder";
-            this.chkStemsFolder.Size = new System.Drawing.Size(129, 17);
-            this.chkStemsFolder.TabIndex = 44;
-            this.chkStemsFolder.Text = "Save to \'stems\' Folder";
-            this.chkStemsFolder.UseVisualStyleBackColor = false;
+            this.panel2.Controls.Add(this.lblBitrate);
+            this.panel2.Controls.Add(this.lblKbps);
+            this.panel2.Controls.Add(this.bitrate);
+            this.panel2.Controls.Add(this.chkFullBandwidth);
+            this.panel2.Controls.Add(this.lblMaxLength);
+            this.panel2.Controls.Add(this.lblSeconds);
+            this.panel2.Controls.Add(this.chkSongName);
+            this.panel2.Controls.Add(this.duration);
+            this.panel2.Controls.Add(this.codec_label);
+            this.panel2.Controls.Add(this.cmbBox_codec);
+            this.panel2.Location = new System.Drawing.Point(0, 2);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(504, 88);
+            this.panel2.TabIndex = 43;
             // 
-            // divider
+            // lblBitrate
             // 
-            this.divider.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.divider.Location = new System.Drawing.Point(0, 448);
-            this.divider.Name = "divider";
-            this.divider.Size = new System.Drawing.Size(504, 2);
-            this.divider.TabIndex = 42;
+            this.lblBitrate.AutoSize = true;
+            this.lblBitrate.ForeColor = System.Drawing.Color.Black;
+            this.lblBitrate.Location = new System.Drawing.Point(14, 65);
+            this.lblBitrate.Name = "lblBitrate";
+            this.lblBitrate.Size = new System.Drawing.Size(37, 13);
+            this.lblBitrate.TabIndex = 40;
+            this.lblBitrate.Text = "Bitrate";
+            // 
+            // lblKbps
+            // 
+            this.lblKbps.AutoSize = true;
+            this.lblKbps.Location = new System.Drawing.Point(105, 65);
+            this.lblKbps.Name = "lblKbps";
+            this.lblKbps.Size = new System.Drawing.Size(30, 13);
+            this.lblKbps.TabIndex = 41;
+            this.lblKbps.Text = "kbps";
+            // 
+            // bitrate
+            // 
+            this.bitrate.Location = new System.Drawing.Point(53, 63);
+            this.bitrate.Maximum = new decimal(new int[] {
+            7200,
+            0,
+            0,
+            0});
+            this.bitrate.Name = "bitrate";
+            this.bitrate.Size = new System.Drawing.Size(49, 20);
+            this.bitrate.TabIndex = 42;
+            this.bitrate.Value = new decimal(new int[] {
+            128,
+            0,
+            0,
+            0});
+            this.bitrate.ValueChanged += new System.EventHandler(this.bitrate_ValueChanged);
             // 
             // Form1
             // 
@@ -718,7 +782,7 @@ namespace SpleeterGui
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(522, 693);
+            this.ClientSize = new System.Drawing.Size(522, 713);
             this.Controls.Add(this.pnlRecombine);
             this.Controls.Add(this.pnlMain);
             this.Controls.Add(this.parts_label);
@@ -746,7 +810,8 @@ namespace SpleeterGui
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.pnlMain.ResumeLayout(false);
-            this.pnlMain.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -754,6 +819,9 @@ namespace SpleeterGui
             this.pnlRecombine.ResumeLayout(false);
             this.pnlRecombine.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bitrate)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -816,6 +884,11 @@ namespace SpleeterGui
         private System.Windows.Forms.ToolStripMenuItem spleeterupgradeToolStripMenuItem;
         private System.Windows.Forms.CheckBox chkStemsFolder;
         private System.Windows.Forms.Label divider;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label lblBitrate;
+        private System.Windows.Forms.Label lblKbps;
+        private System.Windows.Forms.NumericUpDown bitrate;
     }
 }
 

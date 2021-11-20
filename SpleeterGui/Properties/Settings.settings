@@ -20,5 +20,8 @@
     <Setting Name="songName" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="bitrate" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">128</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

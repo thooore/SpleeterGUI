@@ -94,5 +94,17 @@ namespace SpleeterGui.Properties {
                 this["songName"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("128")]
+        public int bitrate {
+            get {
+                return ((int)(this["bitrate"]));
+            }
+            set {
+                this["bitrate"] = value;
+            }
+        }
     }
 }
