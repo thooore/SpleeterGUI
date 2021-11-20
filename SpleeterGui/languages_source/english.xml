@@ -42,6 +42,10 @@
   	<item english="Generate NI Container from two stems" control="chkNIStemTwoStems">Generate NI Container from two stems</item>
     <item english="Remove Working Files" control="chkStemRemoveFiles">Remove Working Files</item>
     <item english="Save to 'stems' Folder" control="chkStemsFolder">Save to 'stems' Folder</item>
+    <item english="Bitrate" control="lblBitrate">Bitrate</item>
+    <item english="kbps" control="lblKbps">kbps</item>
+
+
 
 
 
