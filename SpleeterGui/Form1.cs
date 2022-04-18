@@ -18,6 +18,10 @@ using System.Windows.Forms;
 using System.Xml;
 
 /* TODO:
+ * 
+ * Fix NI-stem to be able to use different bitrates (higher than 128k)
+ * 
+ * 
  * Make the panels a groupbox and disable all of them when running, so the user can't screw things up (right now the user can uncheck things)
  * /\ - Changing checkbox states while the program is running crashes things, but the user has to be pretty stupid to try this
  * Refactor the Stem-building and ffmpeg stuff
@@ -29,6 +33,7 @@ namespace SpleeterGui
 {
     public partial class Form1 : Form
     {
+        private bool stemSyncerBackup = false;
         private string stem_count = "2";
         private string mask_extension = "average";
         private string storage = "";
@@ -66,6 +71,7 @@ namespace SpleeterGui
             txt_output_directory.Text = Properties.Settings.Default.output_location;
             cmbBox_codec.SelectedIndex = Properties.Settings.Default.codec;
             chkSongName.Checked = Properties.Settings.Default.songName;
+            txt_collection_path.Text = Properties.Settings.Default.collection_location;
 
             if (Properties.Settings.Default.path_python == "")
             {
@@ -539,6 +545,12 @@ namespace SpleeterGui
             }));
         }
 
+
+        private void run_StemSyncerExited(object sender, EventArgs e)
+        {
+            textBox1.AppendText("\r\n" + "StemSyncer Exited" + "\r\n");
+        }
+
         private void run_niStemExited(object sender, EventArgs e)
         {
             //cleanup function called by run_niStem
@@ -553,6 +565,12 @@ namespace SpleeterGui
                 if (chkStemRemoveFiles.Checked == true)
                 {
                     RemoveStemFiles();
+                }
+
+                if (chkUpdateCollection.Checked == true)
+                {
+                    textBox1.AppendText("\r\n" + "Starting StemSyncer" + "\r\n");
+                    run_StemSyncer();
                 }
 
                 files_remain--;
@@ -951,7 +969,7 @@ txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + 
                 chkRecombine.Enabled = false;
                 pnlRecombine.Height = 20;
                 pnlMain.Location = new Point(12, 182);
-                this.Height = 752;
+                this.Height = 782;
                 // Project height default in Designer: 667 (before)
                 // this.Height = 677;
             }
@@ -963,14 +981,14 @@ txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + 
                 {
                     pnlRecombine.Height = 50;
                     pnlMain.Location = new Point(12, 202);
-                    this.Height = 772;
+                    this.Height = 802;
                     // this.Height = 697; (before)
                 }
                 else
                 {
                     pnlRecombine.Height = 20;
                     pnlMain.Location = new Point(12, 182);
-                    this.Height = 752;
+                    this.Height = 782;
                     // this.Height = 677; (before)
 
                     chkRPartVocal.Checked = false;
@@ -1158,61 +1176,7 @@ txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + 
         private void run_ffmpeg(String filename)
         {
             run_ffmpegAudio(filename);
-            //run_ffmpegCover(filename);      // Not currently used
-            //run_ffmpegMetadata(filename);   // Not currently used
         }
-
-        //private void run_ffmpegCover(String filename)
-        //{
-        //    //ALBUM COVER
-        //    String args = "-y -i " + (char)34 + filename + (char)34 + " " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + ".jpg" + (char)34;
-
-        //    ProcessStartInfo processStartInfo = new ProcessStartInfo(storage + @"\ffmpeg.exe", args);
-        //    processStartInfo.WorkingDirectory = storage;
-
-        //    processStartInfo.UseShellExecute = false;
-        //    processStartInfo.ErrorDialog = false;
-        //    processStartInfo.RedirectStandardOutput = true;
-        //    processStartInfo.RedirectStandardError = true;
-        //    processStartInfo.CreateNoWindow = true;
-        //    Process process = new Process();
-        //    process.StartInfo = processStartInfo;
-        //    process.EnableRaisingEvents = true;
-        //    process.Exited += new EventHandler(run_doNothingOnExit);
-        //    process.OutputDataReceived += new DataReceivedEventHandler(OutputHandler);
-        //    process.ErrorDataReceived += new DataReceivedEventHandler(ErrorHandler);
-        //    bool processStarted = process.Start();
-        //    process.BeginOutputReadLine();
-        //    process.BeginErrorReadLine();
-
-        //    textBox1.AppendText("\r\n" + ("COVER DONE!") + "\r\n");
-        //}
-
-        //private void run_ffmpegMetadata(String filename)
-        //{
-        //    //METADATA
-        //    String args = "-y -i " + (char)34 + filename + (char)34 + " -f ffmetadata " + (char)34 + txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + ".txt" + (char)34;
-
-        //    ProcessStartInfo processStartInfo = new ProcessStartInfo(storage + @"\ffmpeg.exe", args);
-        //    processStartInfo.WorkingDirectory = storage;
-
-        //    processStartInfo.UseShellExecute = false;
-        //    processStartInfo.ErrorDialog = false;
-        //    processStartInfo.RedirectStandardOutput = true;
-        //    processStartInfo.RedirectStandardError = true;
-        //    processStartInfo.CreateNoWindow = true;
-        //    Process process = new Process();
-        //    process.StartInfo = processStartInfo;
-        //    process.EnableRaisingEvents = true;
-        //    process.Exited += new EventHandler(run_doNothingOnExit);
-        //    process.OutputDataReceived += new DataReceivedEventHandler(OutputHandler);
-        //    process.ErrorDataReceived += new DataReceivedEventHandler(ErrorHandler);
-        //    bool processStarted = process.Start();
-        //    process.BeginOutputReadLine();
-        //    process.BeginErrorReadLine();
-
-        //    textBox1.AppendText("\r\n" + ("METADATA DONE!") + "\r\n");
-        //}
 
         private void run_ffmpegAudio(String filename)
         {
@@ -1297,6 +1261,63 @@ txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + 
             textBox1.AppendText("\r\n" + ("RENAME ACCOMPANIMENT DONE!") + "\r\n");
         }
 
+        private void run_StemSyncer()
+        {
+
+            if (File.Exists(storage + @"\python\StemSyncer\StemSyncer.py"))
+            {
+                String collectionPath = (char)34 + txt_collection_path.Text + (char)34;
+                if (File.Exists(collectionPath))
+                {
+                    if (!(stemSyncerBackup))
+                    {
+                        File.Copy(collectionPath, txt_output_directory.Text + "\\collection_backup.nml", true);
+                        stemSyncerBackup = true;
+                    }
+
+
+
+                    String outputArgument;
+
+                    if (!chkStemsFolder.Checked)
+                    {
+                        outputArgument = (char)34 + txt_output_directory.Text + @"\" + current_songname + ".stem." +
+                        cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34;
+                    }
+                    else
+                    {
+                        outputArgument = (char)34 + txt_output_directory.Text + @"\" + "stems" + @"\" + current_songname + ".stem." +
+                        cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34;
+                    }
+
+                    String args = storage + @"\python\StemSyncer\StemSyncer.py " + " \"" + current_song + "\" " + outputArgument + " " + collectionPath + " " + collectionPath;
+                    ProcessStartInfo processStartInfo = new ProcessStartInfo(((char)34 + storage + @"\python\python.exe" + (char)34), args);
+                    processStartInfo.WorkingDirectory = storage;
+
+                    processStartInfo.UseShellExecute = false;
+                    processStartInfo.ErrorDialog = false;
+                    processStartInfo.RedirectStandardOutput = true;
+                    processStartInfo.RedirectStandardError = true;
+                    processStartInfo.CreateNoWindow = true;
+                    Process process = new Process();
+                    process.StartInfo = processStartInfo;
+                    process.EnableRaisingEvents = true;
+                    process.Exited += new EventHandler(run_StemSyncerExited);
+                    process.OutputDataReceived += new DataReceivedEventHandler(OutputHandler);
+                    process.ErrorDataReceived += new DataReceivedEventHandler(ErrorHandler);
+                    bool processStarted = process.Start();
+                    process.BeginOutputReadLine();
+                    process.BeginErrorReadLine();
+                }
+            }
+            else
+            {
+                textBox1.AppendText("\r\n" +
+                    "StemSyncer was not found!");
+            }
+        }
+
+
         private void cmbBox_codec_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cmbBox_codec.SelectedIndex == 0 || cmbBox_codec.SelectedIndex == 5)
@@ -1315,6 +1336,25 @@ txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + 
         {
             Properties.Settings.Default.bitrate = Convert.ToInt32(bitrate.Value);
             Properties.Settings.Default.Save();
+        }
+
+        private void btn_browse_collection_Click(object sender, EventArgs e)
+        {
+            //choose a song(s) to spleet
+            if (files_remain == 0)
+            {
+                DialogResult result = openFileDialogCollection.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    txt_collection_path.Text = openFileDialogCollection.FileName;
+                    Properties.Settings.Default.collection_location = txt_collection_path.Text;
+                    Properties.Settings.Default.Save();
+                }
+            }
+            else
+            {
+                System.Media.SystemSounds.Asterisk.Play();
+            }
         }
     }
 }

@@ -106,5 +106,17 @@ namespace SpleeterGui.Properties {
                 this["bitrate"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string collection_location {
+            get {
+                return ((string)(this["collection_location"]));
+            }
+            set {
+                this["collection_location"] = value;
+            }
+        }
     }
 }

@@ -23,5 +23,8 @@
     <Setting Name="bitrate" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">128</Value>
     </Setting>
+    <Setting Name="collection_location" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>
