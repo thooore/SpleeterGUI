@@ -1274,7 +1274,7 @@ txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + 
 
             if (File.Exists(storage + @"\python\StemSyncer\StemSyncer.py"))
             {
-                String collectionPath = (char)34 + txt_collection_path.Text + (char)34;
+                String collectionPath = txt_collection_path.Text;
                 if (File.Exists(collectionPath))
                 {
                     if (!(stemSyncerBackup))
@@ -1282,6 +1282,7 @@ txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + 
                         File.Copy(collectionPath, txt_output_directory.Text + "\\collection_backup.nml", true);
                         stemSyncerBackup = true;
                     }
+                    collectionPath = (char)34 + collectionPath + (char)34;
 
                     textBox1.AppendText("\r\n" +
                         "Running StemSyncer!");
@@ -1317,18 +1318,17 @@ txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + 
                     bool processStarted = process.Start();
                     process.BeginOutputReadLine();
                     process.BeginErrorReadLine();
-                    process.WaitForExit();
                 }
                 else
                 {
                     textBox1.AppendText("\r\n" +
-                        "Collection was not found!");
+                        "Collection was not found!" + "\r\n");
                 }
             }
             else
             {
                 textBox1.AppendText("\r\n" +
-                    "StemSyncer was not found!");
+                    "StemSyncer was not found!" + "\r\n");
             }
         }
 
