@@ -1283,7 +1283,8 @@ txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + 
                         stemSyncerBackup = true;
                     }
 
-
+                    textBox1.AppendText("\r\n" +
+                        "Running StemSyncer!");
 
                     String outputArgument;
 
@@ -1316,6 +1317,12 @@ txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + 
                     bool processStarted = process.Start();
                     process.BeginOutputReadLine();
                     process.BeginErrorReadLine();
+                    process.WaitForExit();
+                }
+                else
+                {
+                    textBox1.AppendText("\r\n" +
+                        "Collection was not found!");
                 }
             }
             else

@@ -97,7 +97,7 @@ namespace SpleeterGui.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("128")]
+        [global::System.Configuration.DefaultSettingValueAttribute("320")]
         public int bitrate {
             get {
                 return ((int)(this["bitrate"]));
