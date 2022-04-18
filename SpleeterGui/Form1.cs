@@ -356,27 +356,35 @@ namespace SpleeterGui
 
                 string filename = files_to_process[0];
 
+                string fullBandWidth = "";
+                if (chkFullBandwidth.Checked)
+                {
+                    fullBandWidth = "-16kHz";
+                }
+
                 progressBar1.Value = progressBar1.Value + 1;
-                System.IO.File.WriteAllText(storage + @"\config.json", get_config_string());
                 textBox1.AppendText(langStr["processing"] + " " + filename + "\r\n");
                 progress_txt.Text = langStr["working"] + "... " + files_remain + " " + langStr["songs_remaining"];
                 ProcessStartInfo processStartInfo;
+                textBox1.AppendText(("-m spleeter separate -o " + (char)34 + txt_output_directory.Text + (char)34 + " -d " +
+                        (duration.Value).ToString() + " -b " + (bitrate.Value).ToString() + "k -p " + (char)34 + "spleeter:" + stem_count + "stems" + fullBandWidth + (char)34 + " -c " + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) +
+                        " -f " + (char)34 + "{filename}\\{filename} - {instrument}.{codec}" + (char)34 + " " + (char)34 + filename + (char)34) + "\r\n");
                 if (chkNIStem.Checked == true)
                 {
-                    processStartInfo = new ProcessStartInfo(pyPath, @" -W ignore -m spleeter separate  -o " + (char)34 + txt_output_directory.Text + (char)34 + " -d " +
-                        (duration.Value).ToString() + " -b " + (bitrate.Value).ToString() + "k -p " + (char)34 + storage + @"\config.json" + (char)34 + " -c " + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) +
+                    processStartInfo = new ProcessStartInfo(pyPath, @" -m spleeter separate  -o " + (char)34 + txt_output_directory.Text + (char)34 + " -d " +
+                        (duration.Value).ToString() + " -b " + (bitrate.Value).ToString() + "k -p " + (char)34 + "spleeter:" + stem_count + "stems" + fullBandWidth + (char)34 + " -c " + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) +
                         " -f " + (char)34 + "{filename}\\{filename} - {instrument}.{codec}" + (char)34 + " " + (char)34 + filename + (char)34);
                 }
                 else if (chkSongName.Checked == true)
                 {
-                    processStartInfo = new ProcessStartInfo(pyPath, @" -W ignore -m spleeter separate  -o " + (char)34 + txt_output_directory.Text + (char)34 + " -d " +
-                        (duration.Value).ToString() + " -b " + (bitrate.Value).ToString() + "k -p " + (char)34 + storage + @"\config.json" + (char)34 + " -c " + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) +
+                    processStartInfo = new ProcessStartInfo(pyPath, @" -m spleeter separate  -o " + (char)34 + txt_output_directory.Text + (char)34 + " -d " +
+                        (duration.Value).ToString() + " -b " + (bitrate.Value).ToString() + "k -p " + (char)34 + "spleeter:" + stem_count + "stems" + fullBandWidth + (char)34 + " -c " + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) +
                         " -f " + (char)34 + "{filename}\\{filename} - {instrument}.{codec}" + (char)34 + " " + (char)34 + filename + (char)34);
                 }
                 else
                 {
-                    processStartInfo = new ProcessStartInfo(pyPath, @" -W ignore -m spleeter separate  -o " + (char)34 + txt_output_directory.Text + (char)34 + " -d " +
-                        (duration.Value).ToString() + " -b " + (bitrate.Value).ToString() + "k -p " + (char)34 + storage + @"\config.json" + (char)34 + " -c " + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) +
+                    processStartInfo = new ProcessStartInfo(pyPath, @" -m spleeter separate  -o " + (char)34 + txt_output_directory.Text + (char)34 + " -d " +
+                        (duration.Value).ToString() + " -b " + (bitrate.Value).ToString() + "k -p " + (char)34 + "spleeter:" + stem_count + "stems" + fullBandWidth + (char)34 + " -c " + cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) +
                         " " + (char)34 + filename + (char)34);
                 }
                 processStartInfo.WorkingDirectory = storage;
@@ -784,17 +792,17 @@ txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + 
             Application.Exit();
         }
 
-        private string get_config_string()
-        {
-            //reads the JSON config file for the current stem mode
-            var enviroment = System.Environment.CurrentDirectory;
-            string readText = File.ReadAllText(enviroment + @"\configs\" + stem_count + "stems.json");
-            if (mask_extension == "average")
-            {
-                readText = readText.Replace("zeros", "average");
-            }
-            return readText;
-        }
+        //private string get_config_string()
+        //{
+        //    //reads the JSON config file for the current stem mode
+        //    var enviroment = System.Environment.CurrentDirectory;
+        //    string readText = File.ReadAllText(enviroment + @"\configs\" + stem_count + "stems.json");
+        //    if (mask_extension == "average")
+        //    {
+        //        readText = readText.Replace("zeros", "average");
+        //    }
+        //    return readText;
+        //}
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {

@@ -77,6 +77,9 @@ namespace SpleeterGui
             this.panel3 = new System.Windows.Forms.Panel();
             this.divider = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btn_browse_collection = new System.Windows.Forms.Button();
+            this.chkUpdateCollection = new System.Windows.Forms.CheckBox();
+            this.txt_collection_path = new System.Windows.Forms.TextBox();
             this.chkStemsFolder = new System.Windows.Forms.CheckBox();
             this.chkStemRemoveFiles = new System.Windows.Forms.CheckBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -90,9 +93,6 @@ namespace SpleeterGui
             this.chkRPartBass = new System.Windows.Forms.CheckBox();
             this.chkRPartVocal = new System.Windows.Forms.CheckBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.txt_collection_path = new System.Windows.Forms.TextBox();
-            this.chkUpdateCollection = new System.Windows.Forms.CheckBox();
-            this.btn_browse_collection = new System.Windows.Forms.Button();
             this.openFileDialogCollection = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1.SuspendLayout();
             this.pnlMain.SuspendLayout();
@@ -628,6 +628,45 @@ namespace SpleeterGui
             this.panel1.Size = new System.Drawing.Size(504, 80);
             this.panel1.TabIndex = 41;
             // 
+            // btn_browse_collection
+            // 
+            this.btn_browse_collection.AccessibleDescription = "Choose the collection to read/write from";
+            this.btn_browse_collection.AccessibleName = "Browse";
+            this.btn_browse_collection.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btn_browse_collection.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            this.btn_browse_collection.ForeColor = System.Drawing.Color.Black;
+            this.btn_browse_collection.Location = new System.Drawing.Point(458, 54);
+            this.btn_browse_collection.Name = "btn_browse_collection";
+            this.btn_browse_collection.Size = new System.Drawing.Size(40, 22);
+            this.btn_browse_collection.TabIndex = 17;
+            this.btn_browse_collection.Text = "...";
+            this.btn_browse_collection.UseVisualStyleBackColor = true;
+            this.btn_browse_collection.Click += new System.EventHandler(this.btn_browse_collection_Click);
+            // 
+            // chkUpdateCollection
+            // 
+            this.chkUpdateCollection.AccessibleDescription = "Update an .nml with the data from the splitted song";
+            this.chkUpdateCollection.AccessibleName = "Update Collection";
+            this.chkUpdateCollection.AutoSize = true;
+            this.chkUpdateCollection.Location = new System.Drawing.Point(4, 56);
+            this.chkUpdateCollection.Name = "chkUpdateCollection";
+            this.chkUpdateCollection.Size = new System.Drawing.Size(110, 17);
+            this.chkUpdateCollection.TabIndex = 45;
+            this.chkUpdateCollection.Text = "Update Collection";
+            this.chkUpdateCollection.UseVisualStyleBackColor = false;
+            // 
+            // txt_collection_path
+            // 
+            this.txt_collection_path.AccessibleDescription = "shows collection location";
+            this.txt_collection_path.AccessibleName = "collection display";
+            this.txt_collection_path.AccessibleRole = System.Windows.Forms.AccessibleRole.StaticText;
+            this.txt_collection_path.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            this.txt_collection_path.ForeColor = System.Drawing.Color.Black;
+            this.txt_collection_path.Location = new System.Drawing.Point(117, 54);
+            this.txt_collection_path.Name = "txt_collection_path";
+            this.txt_collection_path.Size = new System.Drawing.Size(338, 22);
+            this.txt_collection_path.TabIndex = 17;
+            // 
             // chkStemsFolder
             // 
             this.chkStemsFolder.AutoSize = true;
@@ -784,45 +823,6 @@ namespace SpleeterGui
             this.pictureBox1.Size = new System.Drawing.Size(279, 71);
             this.pictureBox1.TabIndex = 22;
             this.pictureBox1.TabStop = false;
-            // 
-            // txt_collection_path
-            // 
-            this.txt_collection_path.AccessibleDescription = "shows collection location";
-            this.txt_collection_path.AccessibleName = "collection display";
-            this.txt_collection_path.AccessibleRole = System.Windows.Forms.AccessibleRole.StaticText;
-            this.txt_collection_path.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.txt_collection_path.ForeColor = System.Drawing.Color.Black;
-            this.txt_collection_path.Location = new System.Drawing.Point(117, 54);
-            this.txt_collection_path.Name = "txt_collection_path";
-            this.txt_collection_path.Size = new System.Drawing.Size(338, 22);
-            this.txt_collection_path.TabIndex = 17;
-            // 
-            // chkUpdateCollection
-            // 
-            this.chkUpdateCollection.AccessibleDescription = "Update an .nml with the data from the splitted song";
-            this.chkUpdateCollection.AccessibleName = "Update Collection";
-            this.chkUpdateCollection.AutoSize = true;
-            this.chkUpdateCollection.Location = new System.Drawing.Point(5, 56);
-            this.chkUpdateCollection.Name = "chkUpdateCollection";
-            this.chkUpdateCollection.Size = new System.Drawing.Size(110, 17);
-            this.chkUpdateCollection.TabIndex = 45;
-            this.chkUpdateCollection.Text = "Update Collection";
-            this.chkUpdateCollection.UseVisualStyleBackColor = false;
-            // 
-            // btn_browse_collection
-            // 
-            this.btn_browse_collection.AccessibleDescription = "Choose the collection to read/write from";
-            this.btn_browse_collection.AccessibleName = "Browse";
-            this.btn_browse_collection.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btn_browse_collection.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.btn_browse_collection.ForeColor = System.Drawing.Color.Black;
-            this.btn_browse_collection.Location = new System.Drawing.Point(458, 54);
-            this.btn_browse_collection.Name = "btn_browse_collection";
-            this.btn_browse_collection.Size = new System.Drawing.Size(40, 22);
-            this.btn_browse_collection.TabIndex = 17;
-            this.btn_browse_collection.Text = "...";
-            this.btn_browse_collection.UseVisualStyleBackColor = true;
-            this.btn_browse_collection.Click += new System.EventHandler(this.btn_browse_collection_Click);
             // 
             // openFileDialogCollection
             // 
