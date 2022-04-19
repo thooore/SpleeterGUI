@@ -1272,7 +1272,7 @@ txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + 
         private void run_StemSyncer()
         {
 
-            if (File.Exists(storage + @"\python\StemSyncer\StemSyncer.py"))
+            if (File.Exists(storage + @"\StemSyncer\StemSyncer\StemSyncer.py"))
             {
                 String collectionPath = txt_collection_path.Text;
                 if (File.Exists(collectionPath))
@@ -1300,8 +1300,8 @@ txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + 
                         cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34;
                     }
 
-                    String args = storage + @"\python\StemSyncer\StemSyncer.py " + " \"" + current_song + "\" " + outputArgument + " " + collectionPath + " " + collectionPath;
-                    ProcessStartInfo processStartInfo = new ProcessStartInfo(((char)34 + storage + @"\python\python.exe" + (char)34), args);
+                    String args = storage + @"StemSyncer\StemSyncer\StemSyncer.py " + " \"" + current_song + "\" " + outputArgument + " " + collectionPath + " " + collectionPath;
+                    ProcessStartInfo processStartInfo = new ProcessStartInfo(((char)34 + storage + @"\StemSyncer\python.exe" + (char)34), args);
                     processStartInfo.WorkingDirectory = storage;
 
                     processStartInfo.UseShellExecute = false;
@@ -1318,6 +1318,7 @@ txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + 
                     bool processStarted = process.Start();
                     process.BeginOutputReadLine();
                     process.BeginErrorReadLine();
+                    process.WaitForExit(); 
                 }
                 else
                 {
