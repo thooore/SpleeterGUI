@@ -24,7 +24,10 @@
       <Value Profile="(Default)">320</Value>
     </Setting>
     <Setting Name="collection_location" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">Input Collection</Value>
+    </Setting>
+    <Setting Name="collection_out_location" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Output Collection</Value>
     </Setting>
   </Settings>
 </SettingsFile>

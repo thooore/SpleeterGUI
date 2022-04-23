@@ -94,6 +94,9 @@ namespace SpleeterGui
             this.chkRPartVocal = new System.Windows.Forms.CheckBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.openFileDialogCollection = new System.Windows.Forms.OpenFileDialog();
+            this.btn_browse_collection_out = new System.Windows.Forms.Button();
+            this.txt_collection_path_out = new System.Windows.Forms.TextBox();
+            this.chkOverwriteCollection = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.pnlMain.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -453,7 +456,7 @@ namespace SpleeterGui
             this.pnlMain.Controls.Add(this.panel1);
             this.pnlMain.Location = new System.Drawing.Point(12, 182);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(504, 559);
+            this.pnlMain.Size = new System.Drawing.Size(504, 579);
             this.pnlMain.TabIndex = 37;
             // 
             // panel2
@@ -615,6 +618,9 @@ namespace SpleeterGui
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.chkOverwriteCollection);
+            this.panel1.Controls.Add(this.btn_browse_collection_out);
+            this.panel1.Controls.Add(this.txt_collection_path_out);
             this.panel1.Controls.Add(this.btn_browse_collection);
             this.panel1.Controls.Add(this.chkUpdateCollection);
             this.panel1.Controls.Add(this.txt_collection_path);
@@ -625,12 +631,12 @@ namespace SpleeterGui
             this.panel1.Controls.Add(this.chkNIStem);
             this.panel1.Location = new System.Drawing.Point(0, 476);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(504, 80);
+            this.panel1.Size = new System.Drawing.Size(504, 100);
             this.panel1.TabIndex = 41;
             // 
             // btn_browse_collection
             // 
-            this.btn_browse_collection.AccessibleDescription = "Choose the collection to read/write from";
+            this.btn_browse_collection.AccessibleDescription = "Choose the collection to read from";
             this.btn_browse_collection.AccessibleName = "Browse";
             this.btn_browse_collection.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btn_browse_collection.Font = new System.Drawing.Font("Segoe UI", 8.25F);
@@ -654,17 +660,18 @@ namespace SpleeterGui
             this.chkUpdateCollection.TabIndex = 45;
             this.chkUpdateCollection.Text = "Update Collection";
             this.chkUpdateCollection.UseVisualStyleBackColor = false;
+            this.chkUpdateCollection.CheckedChanged += new System.EventHandler(this.chkUpdateCollection_CheckedChanged);
             // 
             // txt_collection_path
             // 
-            this.txt_collection_path.AccessibleDescription = "shows collection location";
-            this.txt_collection_path.AccessibleName = "collection display";
+            this.txt_collection_path.AccessibleDescription = "shows input collection location";
+            this.txt_collection_path.AccessibleName = "input collection display";
             this.txt_collection_path.AccessibleRole = System.Windows.Forms.AccessibleRole.StaticText;
             this.txt_collection_path.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             this.txt_collection_path.ForeColor = System.Drawing.Color.Black;
-            this.txt_collection_path.Location = new System.Drawing.Point(117, 54);
+            this.txt_collection_path.Location = new System.Drawing.Point(118, 54);
             this.txt_collection_path.Name = "txt_collection_path";
-            this.txt_collection_path.Size = new System.Drawing.Size(338, 22);
+            this.txt_collection_path.Size = new System.Drawing.Size(337, 22);
             this.txt_collection_path.TabIndex = 17;
             // 
             // chkStemsFolder
@@ -828,13 +835,52 @@ namespace SpleeterGui
             // 
             this.openFileDialogCollection.Filter = "Collection|*.nml;*.xml|All files (*.*)|*.*";
             // 
+            // btn_browse_collection_out
+            // 
+            this.btn_browse_collection_out.AccessibleDescription = "Choose the collection to write to";
+            this.btn_browse_collection_out.AccessibleName = "Browse";
+            this.btn_browse_collection_out.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btn_browse_collection_out.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            this.btn_browse_collection_out.ForeColor = System.Drawing.Color.Black;
+            this.btn_browse_collection_out.Location = new System.Drawing.Point(458, 78);
+            this.btn_browse_collection_out.Name = "btn_browse_collection_out";
+            this.btn_browse_collection_out.Size = new System.Drawing.Size(40, 22);
+            this.btn_browse_collection_out.TabIndex = 46;
+            this.btn_browse_collection_out.Text = "...";
+            this.btn_browse_collection_out.UseVisualStyleBackColor = true;
+            this.btn_browse_collection_out.Click += new System.EventHandler(this.btn_browse_collection_out_Click);
+            // 
+            // txt_collection_path_out
+            // 
+            this.txt_collection_path_out.AccessibleDescription = "shows output collection location";
+            this.txt_collection_path_out.AccessibleName = "output collection display";
+            this.txt_collection_path_out.AccessibleRole = System.Windows.Forms.AccessibleRole.StaticText;
+            this.txt_collection_path_out.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            this.txt_collection_path_out.ForeColor = System.Drawing.Color.Black;
+            this.txt_collection_path_out.Location = new System.Drawing.Point(118, 78);
+            this.txt_collection_path_out.Name = "txt_collection_path_out";
+            this.txt_collection_path_out.Size = new System.Drawing.Size(337, 22);
+            this.txt_collection_path_out.TabIndex = 47;
+            // 
+            // chkOverwriteCollection
+            // 
+            this.chkOverwriteCollection.AccessibleDescription = "Create a new collection, overwriting the existing one";
+            this.chkOverwriteCollection.AccessibleName = "Clear Collection";
+            this.chkOverwriteCollection.AutoSize = true;
+            this.chkOverwriteCollection.Location = new System.Drawing.Point(4, 80);
+            this.chkOverwriteCollection.Name = "chkOverwriteCollection";
+            this.chkOverwriteCollection.Size = new System.Drawing.Size(99, 17);
+            this.chkOverwriteCollection.TabIndex = 48;
+            this.chkOverwriteCollection.Text = "Clear Collection";
+            this.chkOverwriteCollection.UseVisualStyleBackColor = false;
+            // 
             // Form1
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(522, 753);
+            this.ClientSize = new System.Drawing.Size(522, 763);
             this.Controls.Add(this.pnlRecombine);
             this.Controls.Add(this.pnlMain);
             this.Controls.Add(this.parts_label);
@@ -945,6 +991,9 @@ namespace SpleeterGui
         private System.Windows.Forms.CheckBox chkUpdateCollection;
         private System.Windows.Forms.TextBox txt_collection_path;
         private System.Windows.Forms.OpenFileDialog openFileDialogCollection;
+        private System.Windows.Forms.Button btn_browse_collection_out;
+        private System.Windows.Forms.TextBox txt_collection_path_out;
+        private System.Windows.Forms.CheckBox chkOverwriteCollection;
     }
 }
 

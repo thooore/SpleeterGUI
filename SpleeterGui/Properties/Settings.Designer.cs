@@ -109,13 +109,25 @@ namespace SpleeterGui.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Input Collection")]
         public string collection_location {
             get {
                 return ((string)(this["collection_location"]));
             }
             set {
                 this["collection_location"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Output Collection")]
+        public string collection_out_location {
+            get {
+                return ((string)(this["collection_out_location"]));
+            }
+            set {
+                this["collection_out_location"] = value;
             }
         }
     }

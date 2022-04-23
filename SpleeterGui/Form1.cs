@@ -72,6 +72,7 @@ namespace SpleeterGui
             cmbBox_codec.SelectedIndex = Properties.Settings.Default.codec;
             chkSongName.Checked = Properties.Settings.Default.songName;
             txt_collection_path.Text = Properties.Settings.Default.collection_location;
+            txt_collection_path_out.Text = Properties.Settings.Default.collection_out_location;
 
             if (Properties.Settings.Default.path_python == "")
             {
@@ -977,7 +978,7 @@ txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + 
                 chkRecombine.Enabled = false;
                 pnlRecombine.Height = 20;
                 pnlMain.Location = new Point(12, 182);
-                this.Height = 782;
+                this.Height = 802;
                 // Project height default in Designer: 667 (before)
                 // this.Height = 677;
             }
@@ -989,14 +990,14 @@ txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + 
                 {
                     pnlRecombine.Height = 50;
                     pnlMain.Location = new Point(12, 202);
-                    this.Height = 802;
+                    this.Height = 822;
                     // this.Height = 697; (before)
                 }
                 else
                 {
                     pnlRecombine.Height = 20;
                     pnlMain.Location = new Point(12, 182);
-                    this.Height = 782;
+                    this.Height = 802;
                     // this.Height = 677; (before)
 
                     chkRPartVocal.Checked = false;
@@ -1022,6 +1023,26 @@ txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + 
                         chkRPartOther.Enabled = true;
                         break;
                 }
+            }
+            if (chkUpdateCollection.Checked && (chkNIStem.Checked || chkNIStemTwoStems.Checked))
+            {
+                chkOverwriteCollection.Enabled = true;
+            }
+            else
+            {
+                chkOverwriteCollection.Enabled = false;
+            }
+            if (chkNIStemTwoStems.Checked || chkNIStem.Checked)
+            {
+                chkStemRemoveFiles.Enabled = true;
+                chkStemsFolder.Enabled = true;
+                chkUpdateCollection.Enabled = true;
+            }
+            else
+            {
+                chkStemRemoveFiles.Enabled = false;
+                chkStemsFolder.Enabled = false;
+                chkUpdateCollection.Enabled = false;
             }
         }
 
@@ -1275,12 +1296,24 @@ txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + 
             if (File.Exists(storage + @"\StemSyncer\StemSyncer\StemSyncer.py"))
             {
                 String collectionPath = txt_collection_path.Text;
+                String outputCollectionPath = txt_collection_path_out.Text;
                 if (File.Exists(collectionPath))
                 {
+                    string createNewCollection = "";
+                    if (!(File.Exists(outputCollectionPath)))
+                    {
+                        textBox1.AppendText("\r\n" +
+                        "Output collection does not exist! \n Trying to create a new collection!");
+                        createNewCollection = " -create";
+                    }
                     if (!(stemSyncerBackup))
                     {
                         File.Copy(collectionPath, txt_output_directory.Text + "\\collection_backup.nml", true);
                         stemSyncerBackup = true;
+                    }
+                    if (chkOverwriteCollection.Checked)
+                    {
+                        createNewCollection = " -create";
                     }
                     collectionPath = (char)34 + collectionPath + (char)34;
 
@@ -1300,7 +1333,7 @@ txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + 
                         cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34;
                     }
 
-                    String args = storage + @"\StemSyncer\StemSyncer\StemSyncer.py " + " \"" + current_song + "\" " + outputArgument + " " + collectionPath + " " + collectionPath;
+                    String args = storage + @"\StemSyncer\StemSyncer\StemSyncer.py " + " \"" + current_song + "\" " + outputArgument + " " + collectionPath + " " + outputCollectionPath + " " + createNewCollection;
                     ProcessStartInfo processStartInfo = new ProcessStartInfo(((char)34 + storage + @"\StemSyncer\python.exe" + (char)34), args);
                     processStartInfo.WorkingDirectory = storage;
 
@@ -1371,6 +1404,31 @@ txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + 
             {
                 System.Media.SystemSounds.Asterisk.Play();
             }
+        }
+
+        private void btn_browse_collection_out_Click(object sender, EventArgs e)
+        {
+            //choose a song(s) to spleet
+            if (files_remain == 0)
+            {
+                DialogResult result = openFileDialogCollection.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    txt_collection_path_out.Text = openFileDialogCollection.FileName;
+                    Properties.Settings.Default.collection_out_location = txt_collection_path_out.Text;
+                    Properties.Settings.Default.Save();
+                }
+            }
+            else
+            {
+                System.Media.SystemSounds.Asterisk.Play();
+            }
+
+        }
+
+        private void chkUpdateCollection_CheckedChanged(object sender, EventArgs e)
+        {
+            update_checks();
         }
     }
 }
