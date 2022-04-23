@@ -1300,7 +1300,7 @@ txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + 
                         cmbBox_codec.GetItemText(cmbBox_codec.SelectedItem) + (char)34;
                     }
 
-                    String args = storage + @"StemSyncer\StemSyncer\StemSyncer.py " + " \"" + current_song + "\" " + outputArgument + " " + collectionPath + " " + collectionPath;
+                    String args = storage + @"\StemSyncer\StemSyncer\StemSyncer.py " + " \"" + current_song + "\" " + outputArgument + " " + collectionPath + " " + collectionPath;
                     ProcessStartInfo processStartInfo = new ProcessStartInfo(((char)34 + storage + @"\StemSyncer\python.exe" + (char)34), args);
                     processStartInfo.WorkingDirectory = storage;
 
