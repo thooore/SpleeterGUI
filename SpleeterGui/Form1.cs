@@ -1316,6 +1316,7 @@ txt_output_directory.Text + @"\" + current_songname + @"\" + current_songname + 
                         createNewCollection = " -create";
                     }
                     collectionPath = (char)34 + collectionPath + (char)34;
+                    outputCollectionPath = (char)34 + outputCollectionPath + (char)34;
 
                     textBox1.AppendText("\r\n" +
                         "Running StemSyncer!");
